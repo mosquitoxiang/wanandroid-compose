@@ -4,6 +4,8 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven {url "https://jitpack.io"}
+        maven {url 'https://maven.google.com'}
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.1"
@@ -23,4 +25,14 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext{
+    compileSdkVersion = 29
+    buildToolsVersion = "28.0.3"
+    minSdkVersion = 19
+    targetSdkVersion = 30
+    versionCode = 1
+    versionName = "1.0"
+    buildToolsVersion = "30.0.1"
 }

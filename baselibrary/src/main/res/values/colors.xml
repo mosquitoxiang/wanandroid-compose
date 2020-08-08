@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="orange">#f8b62d</color>
+    <color name="red">#ff0006</color>
+
+    <color name="transparent">#00000000</color><!-- 透明色 -->
+    <color name="gray">#808080</color><!--灰色 -->
+    <color name="dimgray">#696969</color><!--暗灰色 -->
+
+    <color name="green">#008000</color>
+    <color name="blue">#3F51B5</color>
+    <color name="lightblue">#ADD8E6</color><!--亮蓝色 -->
+    <color name="gold">#FFD700</color><!--金色 -->
+</resources>
