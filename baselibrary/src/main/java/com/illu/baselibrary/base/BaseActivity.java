@@ -28,7 +28,6 @@ public abstract class BaseActivity extends AppCompatActivity implements OnTitleB
             delayMillis = 0;
         }
         return postAtTime(r, SystemClock.uptimeMillis() + delayMillis);
-        getLifecycle().addObserver();
     }
 
     public final boolean postAtTime(Runnable r, long uptimeMillis){

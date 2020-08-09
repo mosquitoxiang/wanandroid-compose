@@ -1,4 +1,4 @@
-package com.illu.giao.wx;
+package com.illu.demo.wx;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -7,12 +7,11 @@ import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.illu.giao.MyApp;
+import com.illu.baselibrary.App;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXImageObject;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
-import com.tencent.mm.opensdk.modelmsg.WXTextObject;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
@@ -54,7 +53,7 @@ public class WeChatHelper {
 
     public static IWXAPI getIWXAPI() {
         if (api == null) {
-            regToWx(MyApp.Companion.getINSTANCE());
+            regToWx(App.Companion.getINSTANCE());
         }
         return api;
     }

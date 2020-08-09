@@ -1,4 +1,4 @@
-package com.illu.giao.net
+package com.illu.demo.net
 
 import main.java.com.zhangyu.network.ServiceCreator
 

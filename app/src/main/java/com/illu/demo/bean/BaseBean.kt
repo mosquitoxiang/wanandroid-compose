@@ -1,4 +1,4 @@
-package com.illu.giao.bean
+package com.illu.demo.bean
 
 data class BaseBean<T>(
     private val code: Int,

@@ -1,4 +1,4 @@
-package com.illu.giao.wx;
+package com.illu.demo.wx;
 
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;

@@ -8,12 +8,10 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.os.Build
 import android.webkit.WebSettings
-import com.illu.giao.MyApp
-import com.illu.giao.net.LogInterceptor
-import com.illu.giao.net.Retry
-import java.util.*
+import com.illu.baselibrary.App
+import com.illu.demo.net.LogInterceptor
+import com.illu.demo.net.Retry
 
 object ServiceCreator {
 
@@ -67,7 +65,7 @@ object ServiceCreator {
     fun getUserAgent(): String {
         var userAgent = ""
         try {
-            userAgent = WebSettings.getDefaultUserAgent(MyApp.INSTANCE)
+            userAgent = WebSettings.getDefaultUserAgent(App.INSTANCE)
         } catch (e: Exception) {
             userAgent = System.getProperty("http.agent")!!
         }
