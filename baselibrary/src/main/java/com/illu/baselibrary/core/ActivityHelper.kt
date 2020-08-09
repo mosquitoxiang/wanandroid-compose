@@ -9,7 +9,7 @@ import com.illu.baselibrary.lifecycles.BaseLifecycleCallbacks
 
 object ActivityHelper {
 
-    val activities = mutableListOf<Activity>()
+    private val activities = mutableListOf<Activity>()
 
     fun init(application: Application){
         application.registerActivityLifecycleCallbacks(BaseLifecycleCallbacks(
@@ -30,6 +30,7 @@ object ActivityHelper {
         }
         currentActivity.startActivity(intent)
     }
+
 
     fun finish(vararg clazz: Class<out Activity>){
         activities.forEach { activity ->

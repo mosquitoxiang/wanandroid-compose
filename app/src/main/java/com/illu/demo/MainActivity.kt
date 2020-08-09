@@ -2,15 +2,24 @@ package com.illu.demo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.illu.baselibrary.base.BaseActivity
+import com.illu.baselibrary.core.ActivityHelper
 import com.illu.baselibrary.core.getSpValue
 import com.illu.baselibrary.core.putSpValue
+import com.illu.baselibrary.ext.showSoftInput
+import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity() : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        putSpValue("q", 1)
-        println("qq: " + getSpValue("q", 0))
+    override fun getLayoutId(): Int {
+        return R.layout.activity_main
     }
+
+
+    override fun initView() {
+    }
+
+    override fun initData() {
+    }
+
 }

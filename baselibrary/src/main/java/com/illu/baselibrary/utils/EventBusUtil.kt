@@ -2,7 +2,7 @@ package com.zhangyu.util
 import com.illu.niubilife.event.BaseEvent
 import org.greenrobot.eventbus.EventBus
 
-object EventBusUtils {
+object EventBusUtil {
 
     fun register(subscribe: Any){
         EventBus.getDefault().register(subscribe)

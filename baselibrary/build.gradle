@@ -57,7 +57,5 @@ dependencies {
     api "com.squareup.okhttp3:okhttp:3.12.1"
     api "com.squareup.retrofit2:converter-gson:2.5.0"
     api "com.google.code.gson:gson:2.8.5"
-    //微信
-    api "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+"
     api "com.gyf.immersionbar:immersionbar:3.0.0"
 }
