@@ -28,7 +28,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity() {
         })
     }
 
-    fun checkLogin(then: (() -> Unit)? = null): Boolean {
-        return if ()
-    }
+//    fun checkLogin(then: (() -> Unit)? = null): Boolean {
+//        return if ()
+//    }
 }

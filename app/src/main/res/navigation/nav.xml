@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.illu.demo.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_systemFragment"
+            app:destination="@id/systemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/systemFragment"
+        android:name="com.illu.demo.ui.system.SystemFragment"
+        android:label="fragment_system"
+        tools:layout="@layout/fragment_system" >
+        <action
+            android:id="@+id/action_systemFragment_to_findFragment"
+            app:destination="@id/findFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/findFragment"
+        android:name="com.illu.demo.ui.find.FindFragment"
+        android:label="fragment_find"
+        tools:layout="@layout/fragment_find" >
+        <action
+            android:id="@+id/action_findFragment_to_navigationFragment"
+            app:destination="@id/navigationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigationFragment"
+        android:name="com.illu.demo.ui.navigation.NavigationFragment"
+        android:label="fragment_navigation"
+        tools:layout="@layout/fragment_navigation" >
+        <action
+            android:id="@+id/action_navigationFragment_to_mineFragment"
+            app:destination="@id/mineFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mineFragment"
+        android:name="com.illu.demo.ui.mine.MineFragment"
+        android:label="fragment_mine"
+        tools:layout="@layout/fragment_mine" />
+</navigation>

@@ -51,7 +51,7 @@ abstract class BaseActivity : AppCompatActivity(), OnTitleBarListener {
             .init()
     }
 
-    val mHandler: Any = hashCode()
+    private val mHandler: Any = hashCode()
 
     fun postDelayed(r: Runnable?, delayMillis: Long): Boolean {
         var delayMillis = delayMillis
