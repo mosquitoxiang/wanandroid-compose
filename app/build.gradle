@@ -38,5 +38,6 @@ dependencies {
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0"
+    implementation 'com.google.android.material:material:1.1.0'
     implementation project(":baselibrary")
 }

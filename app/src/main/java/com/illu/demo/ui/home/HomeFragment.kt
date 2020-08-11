@@ -1,10 +1,7 @@
 package com.illu.demo.ui.home
 
-import android.util.Log
-import com.illu.baselibrary.base.BaseVmFragment
-import com.illu.baselibrary.utils.LogUtil
+import com.illu.demo.base.BaseVmFragment
 import com.illu.demo.R
-import com.orhanobut.logger.Logger
 
 class HomeFragment : BaseVmFragment<HomeViewModel>() {
 
@@ -17,7 +14,7 @@ class HomeFragment : BaseVmFragment<HomeViewModel>() {
     override fun getLayoutId(): Int = R.layout.fragment_home
 
     override fun initView() {
-        LogUtil.d("HomeFragment")
+
     }
 
     override fun initData() {

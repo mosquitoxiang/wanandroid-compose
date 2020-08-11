@@ -1,6 +1,6 @@
 package com.illu.demo.ui
 
-import com.illu.baselibrary.base.BaseActivity
+import com.illu.demo.base.BaseActivity
 import com.illu.baselibrary.core.ActivityHelper
 import com.illu.demo.R
 

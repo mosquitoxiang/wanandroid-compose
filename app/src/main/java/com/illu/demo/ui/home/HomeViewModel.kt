@@ -1,5 +1,5 @@
 package com.illu.demo.ui.home
 
-import com.illu.baselibrary.base.BaseViewModel
+import com.illu.demo.base.BaseViewModel
 
 class HomeViewModel : BaseViewModel()

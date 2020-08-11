@@ -1,9 +1,8 @@
-package com.illu.baselibrary.base
+package com.illu.demo.base
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.illu.baselibrary.core.ActivityHelper
 
 abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity() {
 

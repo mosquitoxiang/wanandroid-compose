@@ -1,7 +1,9 @@
-package com.illu.baselibrary.base
+package com.illu.demo.base
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import com.illu.baselibrary.core.ActivityHelper
+import com.illu.demo.common.isLogin
 
 abstract class BaseVmFragment <VM : BaseViewModel> : BaseFragment() {
 
@@ -17,4 +19,14 @@ abstract class BaseVmFragment <VM : BaseViewModel> : BaseFragment() {
     }
 
     abstract fun viewModelClass() : Class<VM>
+    
+    fun checkLogin(then: (() -> Unit)?= null): Boolean {
+        return if (isLogin()) {
+            then?.invoke()
+            true
+        } else {
+//            ActivityHelper.start(LoginActivity::class.java)
+            false
+        }
+    }
 }

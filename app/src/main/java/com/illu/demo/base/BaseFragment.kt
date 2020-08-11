@@ -1,4 +1,4 @@
-package com.illu.baselibrary.base
+package com.illu.demo.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

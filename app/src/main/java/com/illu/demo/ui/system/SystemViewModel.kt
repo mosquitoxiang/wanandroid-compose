@@ -1,6 +1,6 @@
 package com.illu.demo.ui.system
 
-import com.illu.baselibrary.base.BaseViewModel
+import com.illu.demo.base.BaseViewModel
 
 class SystemViewModel : BaseViewModel() {
 

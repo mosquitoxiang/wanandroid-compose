@@ -1,13 +1,8 @@
 package com.illu.demo.ui.mine
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.illu.baselibrary.base.BaseVmFragment
-import com.illu.baselibrary.utils.LogUtil
+import com.illu.demo.base.BaseVmFragment
 import com.illu.demo.R
+import kotlinx.android.synthetic.main.fragment_mine.*
 
 class MineFragment : BaseVmFragment<MineViewModel>() {
 
@@ -20,7 +15,30 @@ class MineFragment : BaseVmFragment<MineViewModel>() {
     override fun getLayoutId(): Int = R.layout.fragment_mine
 
     override fun initView() {
-        LogUtil.d("MineFragment")
+        cslLogin.setOnClickListener {
+            checkLogin()
+        }
+        llMinePoints.setOnClickListener {
+            checkLogin()
+        }
+        llPointsRank.setOnClickListener {
+            checkLogin()
+        }
+        llMineShare.setOnClickListener {
+            checkLogin()
+        }
+        llHistory.setOnClickListener {
+
+        }
+        llOpenSource.setOnClickListener {
+
+        }
+        llAboutAuthor.setOnClickListener {
+
+        }
+        llSetting.setOnClickListener {
+
+        }
     }
 
     override fun initData() {

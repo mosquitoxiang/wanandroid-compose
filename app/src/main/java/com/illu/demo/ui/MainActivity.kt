@@ -2,7 +2,7 @@ package com.illu.demo.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.illu.baselibrary.base.BaseActivity
+import com.illu.demo.base.BaseActivity
 import com.illu.baselibrary.utils.showToast
 import com.illu.demo.R
 import com.illu.demo.ui.find.FindFragment

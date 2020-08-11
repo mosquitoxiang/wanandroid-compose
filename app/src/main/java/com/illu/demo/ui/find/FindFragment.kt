@@ -1,6 +1,6 @@
 package com.illu.demo.ui.find
 
-import com.illu.baselibrary.base.BaseVmFragment
+import com.illu.demo.base.BaseVmFragment
 import com.illu.baselibrary.utils.LogUtil
 import com.illu.demo.R
 
