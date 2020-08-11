@@ -40,4 +40,5 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0"
     implementation 'com.google.android.material:material:1.1.0'
     implementation project(":baselibrary")
+    implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50"
 }

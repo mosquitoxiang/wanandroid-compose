@@ -24,5 +24,5 @@ abstract class BaseFragment : Fragment(){
 
     abstract fun getLayoutId(): Int
     abstract fun initView()
-    abstract fun initData()
+    open fun initData() {}
 }
