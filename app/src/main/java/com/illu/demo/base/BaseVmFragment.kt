@@ -8,10 +8,24 @@ import com.illu.demo.common.isLogin
 abstract class BaseVmFragment <VM : BaseViewModel> : BaseFragment() {
 
     protected lateinit var mViewModel: VM
+    private var lazyLoaded = false
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initViewModel()
+        observe()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!lazyLoaded) {
+            lazyLoadData()
+            lazyLoaded = true
+        }
+    }
+
+    open fun lazyLoadData() {
+        // Override if need
     }
 
     private fun initViewModel() {
@@ -28,5 +42,9 @@ abstract class BaseVmFragment <VM : BaseViewModel> : BaseFragment() {
 //            ActivityHelper.start(LoginActivity::class.java)
             false
         }
+    }
+
+    open fun observe() {
+
     }
 }
