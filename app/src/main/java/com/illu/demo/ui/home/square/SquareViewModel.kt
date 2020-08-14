@@ -2,6 +2,7 @@ package com.illu.demo.ui.home.square
 
 import androidx.lifecycle.MutableLiveData
 import com.illu.demo.base.BaseViewModel
+import com.illu.demo.common.loadmore.LoadMoreStatus
 
 class SquareViewModel : BaseViewModel() {
 
@@ -9,22 +10,45 @@ class SquareViewModel : BaseViewModel() {
         const val INITIAL_PAGE = 0
     }
 
-    val refrestStatus = MutableLiveData<Boolean>()
+    val refreshStatus = MutableLiveData<Boolean>()
     val sqareDataList = MutableLiveData<MutableList<SquareBean>>()
+    val loadMoreStatus = MutableLiveData<LoadMoreStatus>()
 
     private var page = INITIAL_PAGE
 
     fun getSquareData() {
-        refrestStatus.value = true
+        refreshStatus.value = true
         launch(
             block = {
                 val squareData = mRespository.getSquareData(INITIAL_PAGE).apiData()
                 page = squareData.curPage
                 sqareDataList.value = squareData.datas.toMutableList()
-                refrestStatus.value = false
+                refreshStatus.value = false
             },
             error = {
-                refrestStatus.value = false
+                refreshStatus.value = false
+            }
+        )
+    }
+
+    fun loadMore() {
+        loadMoreStatus.value = LoadMoreStatus.LOADING
+        launch(
+            block = {
+                val squareData = mRespository.getSquareData(page).apiData()
+                page = squareData.curPage
+
+                val currentList = sqareDataList.value ?: mutableListOf()
+                currentList.addAll(squareData.datas)
+                sqareDataList.value = currentList
+                loadMoreStatus.value = if (squareData.offset >= squareData.total) {
+                    LoadMoreStatus.END
+                } else {
+                    LoadMoreStatus.COMPLETED
+                }
+            },
+            error = {
+                loadMoreStatus.value = LoadMoreStatus.ERROR
             }
         )
     }

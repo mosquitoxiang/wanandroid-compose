@@ -1,4 +1,4 @@
-package com.xiaojianjun.wanandroid.common.loadmore
+package com.illu.demo.common.loadmore
 
 enum class LoadMoreStatus {
     LOADING,

@@ -1,4 +1,4 @@
-package com.xiaojianjun.wanandroid.common.loadmore
+package com.illu.demo.common.loadmore
 
 import com.chad.library.adapter.base.loadmore.LoadMoreView
 import com.illu.demo.R

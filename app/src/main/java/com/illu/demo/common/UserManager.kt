@@ -1,6 +1,7 @@
 package com.illu.demo.common
 
 import com.google.gson.Gson
+import com.illu.baselibrary.core.clearSpValue
 import com.illu.baselibrary.core.getSpValue
 import com.illu.baselibrary.core.putSpValue
 import com.illu.demo.bean.UserInfo
@@ -21,5 +22,9 @@ object UserManager {
 
     fun setUserInfo(userInfo: UserInfo) {
         putSpValue(USER_DATA, mGson.toJson(userInfo))
+    }
+
+    fun clear() {
+        clearSpValue()
     }
 }

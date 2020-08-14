@@ -3,7 +3,10 @@ package com.illu.demo.ui.home.square
 import androidx.lifecycle.Observer
 import com.illu.demo.R
 import com.illu.demo.base.BaseVmFragment
+import com.illu.demo.common.loadmore.CommonLoadMoreView
+import com.illu.demo.common.loadmore.LoadMoreStatus
 import kotlinx.android.synthetic.main.fragment_square.*
+import kotlinx.android.synthetic.main.include_reload.*
 
 class SquareFragment : BaseVmFragment<SquareViewModel>() {
 
@@ -18,7 +21,24 @@ class SquareFragment : BaseVmFragment<SquareViewModel>() {
     override fun getLayoutId(): Int = R.layout.fragment_square
 
     override fun initView() {
-        mAdapter = SquareAdapter()
+        mAdapter = SquareAdapter().apply {
+            setLoadMoreView(CommonLoadMoreView())
+            bindToRecyclerView(recyclerView)
+            setOnLoadMoreListener({
+                mViewModel.loadMore()
+            }, recyclerView)
+            setOnItemChildClickListener { _, _, position ->
+
+            }
+        }
+        swipeRefreshLayout.run {
+            setColorSchemeResources(R.color.textColorPrimary)
+            setProgressBackgroundColorSchemeResource(R.color.bgColorPrimary)
+            setOnRefreshListener { mViewModel.getSquareData() }
+        }
+        btnReload.setOnClickListener {
+            mViewModel.getSquareData()
+        }
     }
 
     override fun lazyLoadData() {
@@ -26,12 +46,21 @@ class SquareFragment : BaseVmFragment<SquareViewModel>() {
     }
 
     override fun observe() {
+        super.observe()
         mViewModel.run {
             sqareDataList.observe(viewLifecycleOwner, Observer {
                 mAdapter.setNewData(it)
             })
-            refrestStatus.observe(viewLifecycleOwner, Observer {
+            refreshStatus.observe(viewLifecycleOwner, Observer {
                 swipeRefreshLayout.isRefreshing = it
+            })
+            loadMoreStatus.observe(viewLifecycleOwner, Observer {
+                when(it) {
+                    LoadMoreStatus.COMPLETED -> mAdapter.loadMoreComplete()
+                    LoadMoreStatus.ERROR -> mAdapter.loadMoreFail()
+                    LoadMoreStatus.END -> mAdapter.loadMoreEnd()
+                    else -> return@Observer
+                }
             })
         }
     }

@@ -1,6 +1,7 @@
 package com.illu.demo.base
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.illu.baselibrary.core.ActivityHelper
 import com.illu.demo.common.isLogin
@@ -46,6 +47,10 @@ abstract class BaseVmFragment <VM : BaseViewModel> : BaseFragment() {
     }
 
     open fun observe() {
-
+        mViewModel.loginStatusInvalid.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                ActivityHelper.start(LoginActivity::class.java)
+            }
+        })
     }
 }

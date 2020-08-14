@@ -6,8 +6,8 @@ import androidx.lifecycle.Observer
 import com.illu.baselibrary.utils.LogUtil
 import com.illu.demo.R
 import com.illu.demo.base.BaseVmFragment
-import com.xiaojianjun.wanandroid.common.loadmore.CommonLoadMoreView
-import com.xiaojianjun.wanandroid.common.loadmore.LoadMoreStatus
+import com.illu.demo.common.loadmore.CommonLoadMoreView
+import com.illu.demo.common.loadmore.LoadMoreStatus
 import kotlinx.android.synthetic.main.fragment_hot.*
 import kotlinx.android.synthetic.main.include_reload.*
 
@@ -26,7 +26,7 @@ class HotFragment : BaseVmFragment<HotViewModel>() {
     @SuppressLint("ResourceAsColor")
     override fun initView() {
         swiperRefreshLayout.run {
-            setColorSchemeColors(R.color.textColorPrimary)
+            setColorSchemeResources(R.color.textColorPrimary)
             setProgressBackgroundColorSchemeResource(R.color.bgColorPrimary)
             setOnRefreshListener { mViewModel.refreshArticlelist() }
         }

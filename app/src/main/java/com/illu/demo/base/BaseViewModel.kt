@@ -6,7 +6,9 @@ import com.illu.baselibrary.App
 import com.illu.baselibrary.R
 import com.illu.demo.net.ApiException
 import com.illu.baselibrary.utils.showToast
+import com.illu.demo.common.UserManager
 import com.illu.demo.common.repository.AppRepository
+import com.illu.demo.net.HttpUtils
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
@@ -65,7 +67,9 @@ open class BaseViewModel : ViewModel(){
             is ApiException -> {
                 when(e.code) {
                     -1001 -> {
-
+                        HttpUtils.clearCookie()
+                        UserManager.clear()
+                        loginStatusInvalid.value = true
                     }
                     -1 -> if (showErrorToast) App.INSTANCE.showToast(e.message)
                     else -> if (showErrorToast) App.INSTANCE.showToast(e.message)

@@ -2,7 +2,7 @@ package com.illu.demo.ui.home.hot
 
 import androidx.lifecycle.MutableLiveData
 import com.illu.demo.base.BaseViewModel
-import com.xiaojianjun.wanandroid.common.loadmore.LoadMoreStatus
+import com.illu.demo.common.loadmore.LoadMoreStatus
 
 class HotViewModel : BaseViewModel() {
 
