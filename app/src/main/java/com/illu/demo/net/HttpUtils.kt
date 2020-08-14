@@ -19,6 +19,7 @@ object HttpUtils {
 
     private val okHttpClient = OkHttpClient.Builder()
         .callTimeout(10, TimeUnit.SECONDS)
+        .addInterceptor(LogInterceptor())
         .cookieJar(cookieJar)
         .build()
 

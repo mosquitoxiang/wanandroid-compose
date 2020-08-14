@@ -2,15 +2,19 @@ package com.illu.demo.base
 
 import android.os.*
 import android.view.View
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.gyf.immersionbar.ImmersionBar
 import com.hjq.bar.OnTitleBarListener
 import com.illu.baselibrary.R
 import com.illu.baselibrary.core.ActivityHelper
+import com.xiaojianjun.wanandroid.common.dialog.ProgressDialogFragment
 import com.zhangyu.util.EventBusUtil.register
 import com.zhangyu.util.EventBusUtil.unRegister
 
 abstract class BaseActivity : AppCompatActivity(), OnTitleBarListener {
+
+    private lateinit var progressDialogFragment: ProgressDialogFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +29,7 @@ abstract class BaseActivity : AppCompatActivity(), OnTitleBarListener {
 
     protected abstract fun getLayoutId(): Int
     protected abstract fun initView()
-    protected abstract fun initData()
+    open fun initData() {}
 
     override fun onDestroy() {
         HANDLER.removeCallbacksAndMessages(mHandler)
@@ -76,6 +80,22 @@ abstract class BaseActivity : AppCompatActivity(), OnTitleBarListener {
     protected fun isRegisterEventbus(): Boolean{
         return false
     }
+
+    fun showProgressDialog(@StringRes message: Int) {
+        if (!this::progressDialogFragment.isInitialized) {
+            progressDialogFragment = ProgressDialogFragment.newInstance()
+        }
+        if (!progressDialogFragment.isAdded) {
+            progressDialogFragment.show(supportFragmentManager, message, false)
+        }
+    }
+
+    fun dismissProgressDialog() {
+        if (this::progressDialogFragment.isInitialized && progressDialogFragment.isVisible) {
+            progressDialogFragment.dismissAllowingStateLoss()
+        }
+    }
+
     companion object {
         private val HANDLER = Handler(Looper.getMainLooper())
     }

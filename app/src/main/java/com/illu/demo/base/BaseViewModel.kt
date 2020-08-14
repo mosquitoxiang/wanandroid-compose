@@ -43,6 +43,7 @@ open class BaseViewModel : ViewModel(){
                     }
                     else -> {
                         onError(e, showErrorToast)
+                        error?.invoke(e)
                     }
                 }
             }

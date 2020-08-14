@@ -23,7 +23,6 @@ public class LogInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Charset UTF8 = Charset.forName("UTF-8");
 
-        // 打印请求报文
         Request request = chain.request();
         RequestBody requestBody = request.body();
         String reqBody = null;

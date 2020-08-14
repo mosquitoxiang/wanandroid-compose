@@ -3,6 +3,9 @@ package com.illu.demo.base
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.illu.baselibrary.core.ActivityHelper
+import com.illu.demo.common.isLogin
+import com.illu.demo.ui.login.LoginActivity
 
 abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity() {
 
@@ -11,6 +14,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViewModel()
+        observer()
     }
 
     private fun initViewModel() {
@@ -22,12 +26,18 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity() {
     open fun observer() {
         mViewModel.loginStatusInvalid.observe(this, Observer {
             if (it) {
-//                ActivityHelper.start(LoginActivity::class.java)
+                ActivityHelper.start(LoginActivity::class.java)
             }
         })
     }
 
-//    fun checkLogin(then: (() -> Unit)? = null): Boolean {
-//        return if ()
-//    }
+    fun checkLogin(then: (() -> Unit)?= null): Boolean {
+        return if (isLogin()) {
+            then?.invoke()
+            true
+        } else {
+            ActivityHelper.start(LoginActivity::class.java)
+            false
+        }
+    }
 }

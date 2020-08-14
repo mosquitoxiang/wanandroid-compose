@@ -1,9 +1,9 @@
 package com.illu.demo.net
 
 import com.illu.demo.bean.PageBean
+import com.illu.demo.bean.UserInfo
 import com.illu.demo.ui.home.hot.HotBean
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -12,4 +12,11 @@ interface ApiService {
 
     @GET("/article/list/{page}/json")
     suspend fun getArticleList(@Path("page") page: Int): ApiResult<PageBean<HotBean>>
+
+    @FormUrlEncoded
+    @POST("/user/login")
+    suspend fun requestLogin(
+        @Field("username") userName: String,
+        @Field("password") password: String
+    ): ApiResult<UserInfo>
 }

@@ -1,7 +1,9 @@
 package com.illu.demo.ui.mine
 
+import com.illu.baselibrary.core.ActivityHelper
 import com.illu.demo.base.BaseVmFragment
 import com.illu.demo.R
+import com.illu.demo.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 class MineFragment : BaseVmFragment<MineViewModel>() {
@@ -28,7 +30,7 @@ class MineFragment : BaseVmFragment<MineViewModel>() {
             checkLogin()
         }
         llHistory.setOnClickListener {
-
+            ActivityHelper.start(LoginActivity::class.java)
         }
         llOpenSource.setOnClickListener {
 

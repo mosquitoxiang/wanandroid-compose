@@ -3,9 +3,6 @@ package com.xiaojianjun.wanandroid.common.loadmore
 import com.chad.library.adapter.base.loadmore.LoadMoreView
 import com.illu.demo.R
 
-/**
- * Created by xiaojianjun on 2019-11-06.
- */
 class CommonLoadMoreView : LoadMoreView() {
     override fun getLayoutId() = R.layout.view_load_more_common
 

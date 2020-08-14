@@ -11,7 +11,6 @@ import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.webkit.WebSettings
 import com.illu.baselibrary.App
 import com.illu.demo.net.LogInterceptor
-import com.illu.demo.net.Retry
 
 object ServiceCreator {
 
@@ -32,7 +31,6 @@ object ServiceCreator {
     private fun getOkHttpClient(): OkHttpClient {
         okhttpClient = OkHttpClient.Builder()
                 .retryOnConnectionFailure(true)
-                .addInterceptor(Retry(3))
                 .addInterceptor(LogInterceptor())
                 .addInterceptor(Interceptor { chain ->
                     val original = chain.request()
@@ -44,22 +42,6 @@ object ServiceCreator {
                 })
                 .build()
         return okhttpClient
-    }
-
-    var gson: Gson? = null
-
-    fun buildGson(): Gson {
-        if (gson == null) {
-            gson = GsonBuilder()
-                    .registerTypeAdapter(Int::class.java, IntegerDefaultAdapter())
-                    .registerTypeAdapter(Int::class.javaPrimitiveType, IntegerDefaultAdapter())
-                    .registerTypeAdapter(Double::class.java, DoubleDefaultAdapter())
-                    .registerTypeAdapter(Double::class.javaPrimitiveType, DoubleDefaultAdapter())
-                    .registerTypeAdapter(Long::class.java, LongDefaultAdapter())
-                    .registerTypeAdapter(Long::class.javaPrimitiveType, LongDefaultAdapter())
-                    .create()
-        }
-        return gson!!
     }
 
     fun getUserAgent(): String {
