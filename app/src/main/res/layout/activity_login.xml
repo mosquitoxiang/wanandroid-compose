@@ -12,7 +12,7 @@
         android:id="@+id/titleBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="登陆"
+        app:title="@string/login"
         app:backButton="true"/>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -22,7 +22,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
-        android:hint="账号">
+        android:hint="@string/account">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietAccount"
@@ -43,7 +43,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:hint="密码"
+        android:hint="@string/password"
         android:textColorHint="@color/textColorThird"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/textColorPrimary">
@@ -71,7 +71,7 @@
         android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/shape_bg_btn"
-        android:text="登陆"
+        android:text="@string/login"
         android:textColor="@color/textColorPrimary"
         android:textSize="14sp" />
 
@@ -86,7 +86,7 @@
         android:clickable="true"
         android:focusable="true"
         android:padding="8dp"
-        android:text="去注册"
+        android:text="@string/go_to_register"
         android:textColor="@color/textColorPrimary"
         android:textSize="14sp" />
 

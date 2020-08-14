@@ -11,7 +11,7 @@ import com.illu.demo.base.BaseVmFragment
 class GzhFragment : BaseVmFragment<GzhViewModel>() {
 
     companion object {
-        fun INSTANCE() = GzhFragment()
+        fun instance() = GzhFragment()
     }
 
     override fun viewModelClass(): Class<GzhViewModel> = GzhViewModel::class.java

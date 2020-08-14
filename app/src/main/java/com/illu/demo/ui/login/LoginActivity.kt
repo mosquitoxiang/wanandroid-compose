@@ -22,7 +22,7 @@ class LoginActivity : BaseVmActivity<LoginViewModel>() {
             when {
                 tietAccount.isEmpty() -> tilAccount.error = getString(R.string.account_not_empty)
                 tietPassword.isEmpty() -> tilPassword.error = getString(R.string.password_not_empty)
-                else -> mViewModel.requestLogin(tietAccount, tietPassword)
+                else -> mViewModel.login(tietAccount, tietPassword)
             }
         }
         tvGoRegister.clickWithTrigger {

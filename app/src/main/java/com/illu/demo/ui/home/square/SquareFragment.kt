@@ -6,7 +6,7 @@ import com.illu.demo.base.BaseVmFragment
 class SquareFragment : BaseVmFragment<SquareViewModel>() {
 
     companion object {
-        fun INSTANCE() = SquareFragment()
+        fun instance() = SquareFragment()
     }
 
     override fun viewModelClass(): Class<SquareViewModel> = SquareViewModel::class.java

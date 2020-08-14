@@ -7,7 +7,7 @@ import com.illu.demo.R
 class FindFragment : BaseVmFragment<FindViewModel>() {
 
     companion object {
-        fun INSTANCE() = FindFragment()
+        fun instance() = FindFragment()
     }
 
     override fun viewModelClass(): Class<FindViewModel> = FindViewModel::class.java

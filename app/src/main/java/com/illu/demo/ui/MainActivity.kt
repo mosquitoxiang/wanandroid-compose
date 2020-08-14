@@ -58,11 +58,11 @@ class MainActivity : BaseActivity() {
         var fragment = supportFragmentManager.fragments.find { it.javaClass == clazz }
         if (fragment == null) {
             fragment = when (clazz) {
-                HomeFragment::class.java -> HomeFragment.INSTANCE()
-                SystemFragment::class.java -> SystemFragment.INSTANCE()
-                FindFragment::class.java -> FindFragment.INSTANCE()
-                NavigationFragment::class.java -> NavigationFragment.INSTANCE()
-                MineFragment::class.java -> MineFragment.INSTANCE()
+                HomeFragment::class.java -> HomeFragment.instance()
+                SystemFragment::class.java -> SystemFragment.instance()
+                FindFragment::class.java -> FindFragment.instance()
+                NavigationFragment::class.java -> NavigationFragment.instance()
+                MineFragment::class.java -> MineFragment.instance()
                 else -> throw IllegalAccessException("argument ${clazz.simpleName} is illegal")
             }
         }

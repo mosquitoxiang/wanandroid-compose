@@ -9,11 +9,11 @@ class LoginViewModel : BaseViewModel() {
     val loginStatus = MutableLiveData<Boolean>()
     val loginResult = MutableLiveData<Boolean>()
 
-    fun requestLogin(tietAccount: String, tietPassword: String) {
+    fun login(tietAccount: String, tietPassword: String) {
         loginStatus.value = true
         launch(
             block = {
-                val userInfo = mRespository.requestLogin(tietAccount, tietPassword)
+                val userInfo = mRespository.login(tietAccount, tietPassword)
                 UserManager.setUserInfo(userInfo)
                 loginStatus.value = false
                 loginResult.value = true

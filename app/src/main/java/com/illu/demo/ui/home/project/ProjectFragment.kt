@@ -6,7 +6,7 @@ import com.illu.demo.base.BaseVmFragment
 class ProjectFragment : BaseVmFragment<ProjectViewModel>() {
 
     companion object {
-        fun INSTANCE() = ProjectFragment()
+        fun instance() = ProjectFragment()
     }
     override fun viewModelClass(): Class<ProjectViewModel> = ProjectViewModel::class.java
 

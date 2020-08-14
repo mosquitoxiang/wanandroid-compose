@@ -1,3 +1,5 @@
 package com.illu.demo.common
 
-fun isLogin() = UserManager.getUserInfo() != null
+import com.illu.demo.net.HttpUtils
+
+fun isLogin() = UserManager.getUserInfo() != null && HttpUtils.hasCookie()

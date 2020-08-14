@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.include_reload.*
 class HotFragment : BaseVmFragment<HotViewModel>() {
 
     companion object {
-        fun INSTANCE() = HotFragment()
+        fun instance() = HotFragment()
     }
 
     private lateinit var mAdapter: HotAdapter

@@ -7,7 +7,7 @@ import com.illu.demo.R
 class NavigationFragment : BaseVmFragment<NavigationViewModel>() {
 
     companion object {
-        fun INSTANCE() = NavigationFragment()
+        fun instance() = NavigationFragment()
     }
 
     override fun viewModelClass(): Class<NavigationViewModel> = NavigationViewModel::class.java

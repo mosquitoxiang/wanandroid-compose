@@ -7,7 +7,7 @@ import com.illu.demo.R
 class SystemFragment : BaseVmFragment<SystemViewModel>() {
 
     companion object {
-        fun INSTANCE() = SystemFragment()
+        fun instance() = SystemFragment()
     }
 
     override fun viewModelClass(): Class<SystemViewModel> = SystemViewModel::class.java

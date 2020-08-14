@@ -8,7 +8,6 @@ import com.illu.demo.base.BaseFragmentPagerAdapter
 import com.illu.demo.ui.MainActivity
 import com.illu.demo.ui.home.gzh.GzhFragment
 import com.illu.demo.ui.home.hot.HotFragment
-import com.illu.demo.ui.home.newest.NewestFragment
 import com.illu.demo.ui.home.project.ProjectFragment
 import com.illu.demo.ui.home.square.SquareFragment
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -19,7 +18,7 @@ class HomeFragment : BaseVmFragment<HomeViewModel>() {
     private var currentOffset = 0
 
     companion object {
-        fun INSTANCE() = HomeFragment()
+        fun instance() = HomeFragment()
     }
 
     override fun viewModelClass(): Class<HomeViewModel> = HomeViewModel::class.java
@@ -28,14 +27,18 @@ class HomeFragment : BaseVmFragment<HomeViewModel>() {
 
     override fun initView() {
         fragments = listOf(
-            HotFragment.INSTANCE(),
-            NewestFragment.INSTANCE(),
-            SquareFragment.INSTANCE(),
-            ProjectFragment.INSTANCE(),
-            GzhFragment.INSTANCE()
+            HotFragment.instance(),
+            SquareFragment.instance(),
+            ProjectFragment.instance(),
+            GzhFragment.instance()
         )
 
-        val titles = listOf("热门", "最新", "广场", "项目", "公众号")
+        val titles = listOf(
+            getString(R.string.hot),
+            getString(R.string.square),
+            getString(R.string.project),
+            getString(R.string.gzh)
+        )
         vp.adapter = BaseFragmentPagerAdapter(
             fm = childFragmentManager,
             fragments = fragments,

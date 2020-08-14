@@ -70,7 +70,7 @@ abstract class BaseActivity : AppCompatActivity(), OnTitleBarListener {
     }
 
     protected fun isDark(): Boolean{
-        return false
+        return true
     }
 
     protected fun setStatusBarColor(): Int {

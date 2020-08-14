@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.fragment_mine.*
 class MineFragment : BaseVmFragment<MineViewModel>() {
 
     companion object {
-        fun INSTANCE() = MineFragment()
+        fun instance() = MineFragment()
     }
 
     override fun viewModelClass(): Class<MineViewModel>  = MineViewModel::class.java
@@ -30,7 +30,7 @@ class MineFragment : BaseVmFragment<MineViewModel>() {
             checkLogin()
         }
         llHistory.setOnClickListener {
-            ActivityHelper.start(LoginActivity::class.java)
+
         }
         llOpenSource.setOnClickListener {
 
