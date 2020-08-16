@@ -1,8 +1,8 @@
-package com.illu.demo.ui.home.square
+package com.illu.demo.bean
 
-import android.nfc.Tag
 
-data class SquareBean(
+data class ArticleBean(
+    var top: Boolean = false,
     var apkLink: String? = "",
     var audit: Int = 0,
     var author: String? = "",
@@ -17,7 +17,7 @@ data class SquareBean(
     var fresh: Boolean = false,
     var id: Int = 0,
     var link: String? = "",
-    var niceData: String? = "",
+    var niceDate: String? = "",
     var niceShareDate: String? = "",
     var publishTime: Long = 0L,
     var shareUser: String? = "",

@@ -29,6 +29,9 @@ class MineFragment : BaseVmFragment<MineViewModel>() {
         llMineShare.setOnClickListener {
             checkLogin()
         }
+        llMineCollect.setOnClickListener {
+            checkLogin()
+        }
         llHistory.setOnClickListener {
 
         }

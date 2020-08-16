@@ -3,11 +3,12 @@ package com.illu.demo.ui.home.hot
 import android.annotation.SuppressLint
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
-import com.illu.baselibrary.utils.LogUtil
+import com.illu.baselibrary.core.ActivityHelper
 import com.illu.demo.R
 import com.illu.demo.base.BaseVmFragment
 import com.illu.demo.common.loadmore.CommonLoadMoreView
 import com.illu.demo.common.loadmore.LoadMoreStatus
+import com.illu.demo.ui.web.WebActivity
 import kotlinx.android.synthetic.main.fragment_hot.*
 import kotlinx.android.synthetic.main.include_reload.*
 
@@ -17,7 +18,7 @@ class HotFragment : BaseVmFragment<HotViewModel>() {
         fun instance() = HotFragment()
     }
 
-    private lateinit var mAdapter: HotAdapter
+    private lateinit var mAdapter: ArticleAdapter
 
     override fun viewModelClass(): Class<HotViewModel> = HotViewModel::class.java
 
@@ -30,7 +31,7 @@ class HotFragment : BaseVmFragment<HotViewModel>() {
             setProgressBackgroundColorSchemeResource(R.color.bgColorPrimary)
             setOnRefreshListener { mViewModel.refreshArticlelist() }
         }
-        mAdapter = HotAdapter().apply {
+        mAdapter = ArticleAdapter().apply {
             setLoadMoreView(CommonLoadMoreView())
             bindToRecyclerView(recycleView)
             setOnLoadMoreListener({
@@ -38,8 +39,12 @@ class HotFragment : BaseVmFragment<HotViewModel>() {
             }, recycleView)
             setOnItemClickListener { _, _, position ->
                 val article = mAdapter.data[position]
+                ActivityHelper.start(
+                    WebActivity::class.java,
+                    mapOf(WebActivity.ARTICLE_DATA to article)
+                )
             }
-            setOnItemClickListener { _, view, position ->
+            setOnItemChildClickListener { _, view, position ->
                 val article = mAdapter.data[position]
                 if (view.id == R.id.iv_collect && checkLogin()) {
                     view.isSelected = !view.isSelected

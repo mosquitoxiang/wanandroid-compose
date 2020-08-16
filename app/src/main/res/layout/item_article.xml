@@ -3,34 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:elevation="1dp"
-    android:paddingBottom="8dp"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
-    android:background="@drawable/ripple_item_select">
+    android:background="@drawable/ripple_item_select"
+    android:elevation="1dp"
+    android:paddingBottom="8dp">
 
     <TextView
         android:id="@+id/tv_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:textColor="@color/textColorPrimary"
         android:textSize="12sp"
-        android:layout_marginStart="8dp"
-        app:layout_goneMarginStart="16dp"
         app:layout_constraintStart_toEndOf="@id/tv_top"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
+        app:layout_goneMarginStart="16dp"
         tools:text="xuexuexue" />
 
     <TextView
         android:id="@+id/tv_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:text="置顶"
         android:textColor="@color/colorBadge"
         android:textSize="12sp"
         android:visibility="gone"
-        android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@id/tv_author"
         app:layout_constraintEnd_toStartOf="@+id/tv_author"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,8 +73,8 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:ellipsize="end"
-        android:maxLines="2"
         android:fontFamily="sans-serif-medium"
+        android:maxLines="2"
         android:textColor="@color/textColorPrimary"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/iv_pic"
@@ -116,13 +116,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="时间"
+        android:text="新"
         android:textColor="@color/colorBadge"
         android:textSize="12sp"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/tv_time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_time"
-        app:layout_constraintBottom_toBottomOf="@id/tv_time"
         tools:visibility="visible" />
 
     <TextView
@@ -130,12 +130,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         android:textColor="@color/textColorThird"
         android:textSize="12sp"
-        app:layout_goneMarginStart="16dp"
-        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/tv_fresh"
         app:layout_constraintTop_toBottomOf="@+id/tv_desc"
+        app:layout_goneMarginStart="16dp"
         tools:text="2019-10-20" />
 
     <ImageView
@@ -145,8 +145,8 @@
         android:layout_marginEnd="10dp"
         android:background="?actionBarItemBackground"
         android:padding="6dp"
-        android:tint="@color/textColorThird"
         android:src="@drawable/selector_collect"
+        android:tint="@color/textColorThird"
         app:layout_constraintBottom_toBottomOf="@+id/tv_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_desc"

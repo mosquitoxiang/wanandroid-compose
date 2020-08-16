@@ -2,6 +2,7 @@ package com.illu.demo.ui.home.hot
 
 import androidx.lifecycle.MutableLiveData
 import com.illu.demo.base.BaseViewModel
+import com.illu.demo.bean.ArticleBean
 import com.illu.demo.common.loadmore.LoadMoreStatus
 
 class HotViewModel : BaseViewModel() {
@@ -13,12 +14,13 @@ class HotViewModel : BaseViewModel() {
     val refreshStatus = MutableLiveData<Boolean>()
     val reloadStatus = MutableLiveData<Boolean>()
     val loadMoreStatus = MutableLiveData<LoadMoreStatus>()
-    val articleList: MutableLiveData<MutableList<HotBean>> = MutableLiveData()
+    val articleList: MutableLiveData<MutableList<ArticleBean>> = MutableLiveData()
 
     private var page = INITIAL_PAGE
 
     fun refreshArticlelist() {
         refreshStatus.value = true
+        reloadStatus.value = false
         launch(
             block = {
                 val topArticleDefferd = async {
@@ -30,7 +32,7 @@ class HotViewModel : BaseViewModel() {
                 val topArticleList = topArticleDefferd.await().apply { forEach { it.top = true } }
                 val pagination = pageDefferd.await()
                 page = pagination.curPage
-                articleList.value = mutableListOf<HotBean>().apply {
+                articleList.value = mutableListOf<ArticleBean>().apply {
                     addAll(topArticleList)
                     addAll(pagination.datas)
                 }
@@ -65,10 +67,18 @@ class HotViewModel : BaseViewModel() {
     }
 
     fun uncollect(id: Int) {
-
+        launch(
+            block = {
+                mRespository.unCollect(id)
+            }
+        )
     }
 
     fun collect(id: Int) {
-
+        launch(
+            block = {
+                mRespository.collect(id)
+            }
+        )
     }
 }

@@ -27,4 +27,22 @@ object UserManager {
     fun clear() {
         clearSpValue()
     }
+    
+    fun removeCollectId(collectId: Int) {
+        getUserInfo()?.let {
+            if (collectId in it.collectIds) {
+                it.collectIds.remove(collectId)
+                setUserInfo(it)
+            }
+        }
+    }
+
+    fun addCollectId(collectId: Int) {
+        getUserInfo()?.let {
+            if (collectId !in it.collectIds) {
+                it.collectIds.add(it)
+                setUserInfo(it)
+            }
+        }
+    }
 }

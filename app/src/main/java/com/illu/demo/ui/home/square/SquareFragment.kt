@@ -1,5 +1,6 @@
 package com.illu.demo.ui.home.square
 
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import com.illu.demo.R
 import com.illu.demo.base.BaseVmFragment
@@ -61,6 +62,9 @@ class SquareFragment : BaseVmFragment<SquareViewModel>() {
                     LoadMoreStatus.END -> mAdapter.loadMoreEnd()
                     else -> return@Observer
                 }
+            })
+            reloadStatus.observe(viewLifecycleOwner, Observer {
+                reloadView.isVisible = it
             })
         }
     }

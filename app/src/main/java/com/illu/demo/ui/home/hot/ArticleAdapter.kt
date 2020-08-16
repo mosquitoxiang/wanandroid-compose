@@ -7,11 +7,13 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.illu.baselibrary.ext.htmlToSpanned
 import com.illu.demo.R
-import kotlinx.android.synthetic.main.item_hot.view.*
+import com.illu.demo.bean.ArticleBean
+import kotlinx.android.synthetic.main.item_article.view.*
 
-class HotAdapter(layoutId: Int = R.layout.item_hot) : BaseQuickAdapter<HotBean, BaseViewHolder>(layoutId) {
+class ArticleAdapter(layoutId: Int = R.layout.item_article) :
+    BaseQuickAdapter<ArticleBean, BaseViewHolder>(layoutId) {
 
-    override fun convert(helper: BaseViewHolder, item: HotBean) {
+    override fun convert(helper: BaseViewHolder, item: ArticleBean) {
         helper.run {
             itemView.run {
                 tv_author.text = when {
@@ -47,6 +49,7 @@ class HotAdapter(layoutId: Int = R.layout.item_hot) : BaseQuickAdapter<HotBean, 
                 tv_time.text = item.niceDate
                 iv_collect.isSelected = item.collect
             }
+            addOnClickListener(R.id.iv_collect)
         }
     }
 }

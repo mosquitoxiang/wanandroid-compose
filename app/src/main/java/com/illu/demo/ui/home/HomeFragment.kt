@@ -47,8 +47,9 @@ class HomeFragment : BaseVmFragment<HomeViewModel>() {
         vp.offscreenPageLimit = fragments.size
         tabLayout.setupWithViewPager(vp)
 
-        appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+        appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
             if (activity is MainActivity && this.currentOffset != verticalOffset) {
+                (activity as MainActivity).animateBottomNavigationView(verticalOffset > currentOffset)
                 currentOffset = verticalOffset
             }
         })

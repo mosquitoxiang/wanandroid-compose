@@ -1,7 +1,9 @@
 package com.illu.demo.ui
 
 import android.os.Bundle
+import android.view.ViewPropertyAnimator
 import androidx.fragment.app.Fragment
+import com.google.android.material.animation.AnimationUtils
 import com.illu.demo.base.BaseActivity
 import com.illu.baselibrary.utils.showToast
 import com.illu.demo.R
@@ -16,6 +18,8 @@ class MainActivity : BaseActivity() {
 
     private lateinit var fragments: Map<Int, Fragment>
     private var previousTimeMillis = 0L
+    private var currentBottomNavagtionState = true
+    private var bottomNavigationViewAnimtor: ViewPropertyAnimator? = null
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
@@ -80,6 +84,24 @@ class MainActivity : BaseActivity() {
                 if (it.isAdded) show(it) else add(R.id.fl, it)
             }
         }.commit()
+    }
+
+    fun animateBottomNavigationView(show: Boolean) {
+        if (currentBottomNavagtionState == show) {
+            return
+        }
+        if (bottomNavigationViewAnimtor != null) {
+            bottomNavigationViewAnimtor?.cancel()
+            bottomNav.clearAnimation()
+        }
+        currentBottomNavagtionState = show
+        val targetY = if (show) 0F else bottomNav.measuredHeight.toFloat()
+        val duration = if (show) 225L else 175L
+        bottomNavigationViewAnimtor = bottomNav.animate()
+            .translationY(targetY)
+            .setDuration(duration)
+            .setInterpolator(AnimationUtils.LINEAR_OUT_SLOW_IN_INTERPOLATOR)
+            .setUpdateListener { bottomNavigationViewAnimtor = null }
     }
 
     override fun onBackPressed() {

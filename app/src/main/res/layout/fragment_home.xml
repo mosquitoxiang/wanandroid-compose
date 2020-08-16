@@ -42,7 +42,8 @@
                     android:layout_height="wrap_content"
                     android:text="搜索关键词以空格隔开"
                     android:textColor="@color/textColorThird"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:layout_gravity="center"/>
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
