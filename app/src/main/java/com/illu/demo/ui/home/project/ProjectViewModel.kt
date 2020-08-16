@@ -3,6 +3,10 @@ package com.illu.demo.ui.home.project
 import androidx.lifecycle.MutableLiveData
 import com.illu.demo.base.BaseViewModel
 import com.illu.demo.bean.ArticleBean
+import com.illu.demo.common.UserManager
+import com.illu.demo.common.bus.Bus
+import com.illu.demo.common.bus.USER_COLLECT_UPDATE
+import com.illu.demo.common.isLogin
 import com.illu.demo.common.loadmore.LoadMoreStatus
 import com.illu.demo.net.HttpUtils
 
@@ -17,7 +21,7 @@ class ProjectViewModel : BaseViewModel() {
     val refreshStatus = MutableLiveData<Boolean>()
     val reloadStatus = MutableLiveData<Boolean>()
     val treeListLiveData = MutableLiveData<MutableList<ProjectBean>>()
-    val childListLiveData = MutableLiveData<MutableList<ArticleBean>>()
+    val articleList = MutableLiveData<MutableList<ArticleBean>>()
     val checkPositionLiveData = MutableLiveData<Int>()
 
     private var page = INITIAL_PAGE
@@ -33,7 +37,7 @@ class ProjectViewModel : BaseViewModel() {
                 checkPositionLiveData.value = INITIAL_CHECKED
                 val childrenData = mRespository.getChildrenData(INITIAL_PAGE, id)
                 page = childrenData.curPage
-                childListLiveData.value = childrenData.datas.toMutableList()
+                articleList.value = childrenData.datas.toMutableList()
                 refreshStatus.value = false
             },
             error = {
@@ -52,9 +56,9 @@ class ProjectViewModel : BaseViewModel() {
                 val id = treeList[checkPosition].id
                 val newChildData = mRespository.getChildrenData(page + 1, id)
                 page = newChildData.curPage
-                val currentList = childListLiveData.value ?: mutableListOf()
+                val currentList = articleList.value ?: mutableListOf()
                 currentList.addAll(newChildData.datas)
-                childListLiveData.value = currentList
+                articleList.value = currentList
                 loadMoreStatus.value = if (newChildData.offset >= newChildData.total) {
                     LoadMoreStatus.END
                 } else {
@@ -71,7 +75,7 @@ class ProjectViewModel : BaseViewModel() {
         refreshStatus.value = true
         reloadStatus.value = false
         if (position != checkPositionLiveData.value) {
-            childListLiveData.value = mutableListOf()
+            articleList.value = mutableListOf()
             checkPositionLiveData.value = position
         }
         launch(
@@ -80,7 +84,7 @@ class ProjectViewModel : BaseViewModel() {
                 val id = treeList[position].id
                 val childrenData = mRespository.getChildrenData(INITIAL_PAGE, id)
                 page = childrenData.curPage
-                childListLiveData.value = childrenData.datas.toMutableList()
+                articleList.value = childrenData.datas.toMutableList()
 
                 refreshStatus.value = false
             },
@@ -89,5 +93,52 @@ class ProjectViewModel : BaseViewModel() {
                 reloadStatus.value = true
             }
         )
+    }
+    
+    fun collect(id: Int) {
+        launch(
+            block = {
+                mRespository.collect(id)
+                UserManager.addCollectId(id)
+                updateItemCollectState(id to true)
+                Bus.post(USER_COLLECT_UPDATE, id to true)
+            },
+            error = {
+                updateItemCollectState(id to false)
+            }
+        )
+    }
+
+    fun unCollect(id: Int) {
+        launch(
+            block = {
+                mRespository.unCollect(id)
+                UserManager.removeCollectId(id)
+                updateItemCollectState(id to false)
+                Bus.post(USER_COLLECT_UPDATE, id to false)
+            },
+            error = {
+                updateItemCollectState(id to true)
+            }
+        )
+    }
+
+    fun updateItemCollectState(target: Pair<Int, Boolean>) {
+        val list = articleList.value
+        val item = list?.find { it.id == target.first } ?: return
+        item.collect = target.second
+        articleList.value = list
+    }
+
+    fun updateListCollectState() {
+        val list = articleList.value
+        if (list.isNullOrEmpty()) return
+        if (isLogin()) {
+            val collectIds = UserManager.getUserInfo()?.collectIds ?: return
+            list.forEach { it.collect = collectIds.contains(it.id) }
+        } else {
+            list.forEach { it.collect = false }
+        }
+        articleList.value = list
     }
 }

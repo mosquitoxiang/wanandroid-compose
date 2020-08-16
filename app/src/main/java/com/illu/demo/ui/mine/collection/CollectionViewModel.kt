@@ -4,6 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import com.illu.demo.base.BaseViewModel
 import com.illu.demo.bean.ArticleBean
 import com.illu.demo.common.UserManager
+import com.illu.demo.common.bus.Bus
+import com.illu.demo.common.bus.USER_COLLECT_UPDATE
 import com.illu.demo.common.loadmore.LoadMoreStatus
 
 class CollectionViewModel : BaseViewModel() {
@@ -22,11 +24,15 @@ class CollectionViewModel : BaseViewModel() {
 
     fun refreshData() {
         refreshStatus.value = true
+        emptyDataStatus.value = false
         reloadStatus.value = false
         launch(
             block = {
                 val article = mRespository.getCollectionList(INITIAL_PAGE)
+                article.datas.forEach { it.collect = true }
+                page = article.curPage
                 articleList.value = article.datas.toMutableList()
+                emptyDataStatus.value = article.datas.isEmpty()
                 refreshStatus.value = false
             },
             error = {
@@ -40,7 +46,7 @@ class CollectionViewModel : BaseViewModel() {
         loadMoreStatus.value = LoadMoreStatus.LOADING
         launch(
             block = {
-                val article = mRespository.getArticleList(page + 1)
+                val article = mRespository.getCollectionList(page + 1)
                 val newList = articleList.value ?: mutableListOf()
                 newList.addAll(article.datas)
                 articleList.value = newList
@@ -61,6 +67,7 @@ class CollectionViewModel : BaseViewModel() {
             block = {
                 mRespository.unCollect(id)
                 UserManager.removeCollectId(id)
+                Bus.post(USER_COLLECT_UPDATE, id to false)
             }
         )
     }

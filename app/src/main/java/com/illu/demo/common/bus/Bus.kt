@@ -2,6 +2,7 @@ package com.illu.demo.common.bus
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import com.jeremyliao.liveeventbus.LiveEventBus
 
 object Bus {
 

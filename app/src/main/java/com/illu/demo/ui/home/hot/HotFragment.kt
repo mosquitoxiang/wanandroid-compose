@@ -6,6 +6,9 @@ import androidx.lifecycle.Observer
 import com.illu.baselibrary.core.ActivityHelper
 import com.illu.demo.R
 import com.illu.demo.base.BaseVmFragment
+import com.illu.demo.common.bus.Bus
+import com.illu.demo.common.bus.USER_COLLECT_UPDATE
+import com.illu.demo.common.bus.USER_LOGIN_STATE_CHANGED
 import com.illu.demo.common.loadmore.CommonLoadMoreView
 import com.illu.demo.common.loadmore.LoadMoreStatus
 import com.illu.demo.ui.web.WebActivity
@@ -82,6 +85,12 @@ class HotFragment : BaseVmFragment<HotViewModel>() {
                 reloadView.isVisible = it
             })
         }
+        Bus.observe<Boolean>(USER_LOGIN_STATE_CHANGED, viewLifecycleOwner, Observer {
+            mViewModel.updateListCollectState()
+        })
+        Bus.observe<Pair<Int, Boolean>>(USER_COLLECT_UPDATE, viewLifecycleOwner, Observer {
+            mViewModel.updateItemCollectState(it)
+        })
     }
 
     override fun lazyLoadData() {

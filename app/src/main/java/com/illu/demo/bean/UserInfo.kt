@@ -4,7 +4,7 @@ data class UserInfo(
     val admin: Boolean,
     val chapterTops: MutableList<Any>,
     val coinCount: Int,
-    val collectIds: MutableList<Any>,
+    val collectIds: MutableList<Int>,
     val email: String,
     val icon: String,
     val id: Int,

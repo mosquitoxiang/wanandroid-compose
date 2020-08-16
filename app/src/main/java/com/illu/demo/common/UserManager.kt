@@ -40,7 +40,7 @@ object UserManager {
     fun addCollectId(collectId: Int) {
         getUserInfo()?.let {
             if (collectId !in it.collectIds) {
-                it.collectIds.add(it)
+                it.collectIds.add(collectId)
                 setUserInfo(it)
             }
         }
