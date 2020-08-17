@@ -10,8 +10,9 @@
         android:id="@+id/titleBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="我的收藏"
         app:backButton="true"
+        app:rightBackground="?actionBarItemBackground"
+        app:title="我的积分"
         android:background="@color/bgColorPrimary"
         app:titleColor="@color/textColorPrimary" />
 
@@ -26,11 +27,11 @@
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycleView"
+                android:id="@+id/rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/item_article"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_mine_points" />
 
             <include
                 android:id="@+id/reloadView"
@@ -38,14 +39,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone" />
-
-            <include
-                android:id="@+id/emptyView"
-                layout="@layout/include_empty"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone" />
         </FrameLayout>
-
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

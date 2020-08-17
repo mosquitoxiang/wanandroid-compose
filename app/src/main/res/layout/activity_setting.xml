@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.hjq.bar.TitleBar
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bgColorPrimary"
+        app:backButton="true"
+        app:title="系统设置"
+        app:titleColor="@color/textColorPrimary" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bgColorSecondary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/bgColorPrimary"
+                android:elevation="1dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/llLightDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:background="@drawable/ripple_item_select"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="夜间模式"
+                        android:textColor="@color/textColorPrimary"
+                        android:textSize="14sp" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/scDayNight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/bgColorSecondary" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/bgColorPrimary"
+                android:elevation="1dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/llCheckVersion"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:background="@drawable/ripple_item_select"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="检查版本"
+                        android:textColor="@color/textColorPrimary"
+                        android:textSize="14sp" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tvCheckVersion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="6dp"
+                        android:text="已是最新版"
+                        android:textColor="@color/textColorPrimary"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/bgColorSecondary" />
+
+                <LinearLayout
+                    android:id="@+id/llAboutUs"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:background="@drawable/ripple_item_select"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="关于我们"
+                        android:textColor="@color/textColorPrimary"
+                        android:textSize="14sp" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tvAboutUs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="6dp"
+                        android:text="www.baidu.com"
+                        android:textColor="@color/textColorPrimary"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvLogout"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/ripple_item_select"
+                android:elevation="1dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="退出登录"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

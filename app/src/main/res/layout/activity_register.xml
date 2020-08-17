@@ -11,7 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:backButton="true"
-        app:title="注册"/>
+        app:title="注册"
+        android:background="@color/bgColorPrimary"
+        app:titleColor="@color/textColorPrimary" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilAccount"

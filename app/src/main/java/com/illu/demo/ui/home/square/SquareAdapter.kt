@@ -21,8 +21,9 @@ class SquareAdapter(layoutId: Int = R.layout.item_square) :
                 tv_fresh.isVisible = item.fresh
                 tv_title.text = item.title
                 tv_time.text = item.niceDate
-                addOnClickListener(R.id.iv_collect)
+                iv_collect.isSelected = item.collect
             }
+            addOnClickListener(R.id.iv_collect)
         }
     }
 }

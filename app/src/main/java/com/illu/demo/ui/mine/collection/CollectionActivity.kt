@@ -27,6 +27,7 @@ class CollectionActivity : BaseVmActivity<CollectionViewModel>() {
     override fun getLayoutId(): Int = R.layout.activity_collection
 
     override fun initView() {
+        titleBar.setOnTitleBarListener(this)
         mAdapter = ArticleAdapter().apply {
             bindToRecyclerView(recycleView)
             setLoadMoreView(CommonLoadMoreView())

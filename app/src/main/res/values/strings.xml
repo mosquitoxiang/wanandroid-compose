@@ -26,5 +26,7 @@
     <string name="gzh">公众号</string>
     <string name="no_name">匿名</string>
 
+    <string name="level_rank">等级: %1$d\t\t\t排名: %2$d</string>
+
 
 </resources>

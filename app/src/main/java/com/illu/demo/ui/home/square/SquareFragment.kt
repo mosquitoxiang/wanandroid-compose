@@ -33,7 +33,7 @@ class SquareFragment : BaseVmFragment<SquareViewModel>() {
             setOnLoadMoreListener({
                 mViewModel.loadMore()
             }, recyclerView)
-            setOnItemChildClickListener { _, _, position ->
+            setOnItemClickListener { _, _, position ->
                 val article = mAdapter.data[position]
                 ActivityHelper.start(WebActivity::class.java, mapOf(WebActivity.ARTICLE_DATA to article))
             }

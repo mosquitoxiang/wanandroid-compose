@@ -1,6 +1,9 @@
 package com.illu.demo.bean
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class ArticleBean(
     var top: Boolean = false,
     var apkLink: String? = "",
@@ -31,4 +34,4 @@ data class ArticleBean(
     var userId: Int = 0,
     var visible: Int = 0,
     var zan: Int = 0
-)
+) : Parcelable

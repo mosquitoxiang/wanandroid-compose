@@ -1,13 +1,16 @@
 package com.illu.demo.base
 
-import android.os.*
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.SystemClock
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.gyf.immersionbar.ImmersionBar
 import com.hjq.bar.OnTitleBarListener
-import com.illu.baselibrary.R
 import com.illu.baselibrary.core.ActivityHelper
+import com.illu.demo.R
 import com.xiaojianjun.wanandroid.common.dialog.ProgressDialogFragment
 import com.zhangyu.util.EventBusUtil.register
 import com.zhangyu.util.EventBusUtil.unRegister

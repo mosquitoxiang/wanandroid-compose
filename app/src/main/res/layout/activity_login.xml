@@ -13,7 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/login"
-        app:backButton="true"/>
+        app:backButton="true"
+        android:background="@color/bgColorPrimary"
+        app:titleColor="@color/textColorPrimary" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilAccount"

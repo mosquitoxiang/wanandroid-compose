@@ -4,6 +4,9 @@ import com.illu.demo.bean.ArticleBean
 import com.illu.demo.bean.PageBean
 import com.illu.demo.bean.UserInfo
 import com.illu.demo.ui.home.project.ProjectBean
+import com.illu.demo.ui.mine.rank.minepoints.MinePointsBean
+import com.illu.demo.ui.mine.rank.minepoints.MinePointsListBean
+import com.illu.demo.ui.mine.rank.pointsrank.Rank
 import retrofit2.http.*
 
 interface ApiService {
@@ -58,4 +61,13 @@ interface ApiService {
 
     @POST("lg/uncollect_originId/{id}/json")
     suspend fun uncollect(@Path("id") id: Int): ApiResult<Any?>
+
+    @GET("/lg/coin/list/{page}/json")
+    suspend fun getMinePointsList(@Path("page") page: Int): ApiResult<PageBean<MinePointsListBean>>
+
+    @GET("/lg/coin/userinfo/json")
+    suspend fun getMinePoints(): ApiResult<MinePointsBean>
+
+    @GET("/coin/rank/{page}/json")
+    suspend fun getPointsRank(@Path("page") page: Int): ApiResult<PageBean<Rank>>
 }
