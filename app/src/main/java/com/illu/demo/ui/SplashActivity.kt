@@ -11,7 +11,10 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun initView() {
-        postDelayed(Runnable { ActivityHelper.start(MainActivity::class.java) }, 1000)
+        postDelayed(Runnable {
+            ActivityHelper.start(MainActivity::class.java)
+            ActivityHelper.finish(SplashActivity::class.java)
+        }, 1000)
     }
 
     override fun initData() {

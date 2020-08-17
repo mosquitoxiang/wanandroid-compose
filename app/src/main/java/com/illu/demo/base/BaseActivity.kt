@@ -25,7 +25,7 @@ abstract class BaseActivity : AppCompatActivity(), OnTitleBarListener {
         if (isRegisterEventbus()) {
             register(this)
         }
-        initImmer()
+//        initImmer()
         initView()
         initData()
     }

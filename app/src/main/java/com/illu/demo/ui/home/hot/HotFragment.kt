@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import com.illu.baselibrary.core.ActivityHelper
+import com.illu.baselibrary.utils.LogUtil
 import com.illu.demo.R
 import com.illu.demo.base.BaseVmFragment
 import com.illu.demo.common.bus.Bus
@@ -97,4 +98,13 @@ class HotFragment : BaseVmFragment<HotViewModel>() {
         mViewModel.refreshArticlelist()
     }
 
+    override fun onDestroy() {
+        LogUtil.d("ondestroy")
+        super.onDestroy()
+    }
+
+    override fun onPause() {
+        LogUtil.d("onPause")
+        super.onPause()
+    }
 }
