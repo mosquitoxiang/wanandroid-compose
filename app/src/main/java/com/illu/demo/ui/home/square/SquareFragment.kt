@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import com.illu.baselibrary.core.ActivityHelper
 import com.illu.demo.R
 import com.illu.demo.base.BaseVmFragment
+import com.illu.demo.common.ScrollToTop
 import com.illu.demo.common.bus.Bus
 import com.illu.demo.common.bus.USER_COLLECT_UPDATE
 import com.illu.demo.common.bus.USER_LOGIN_STATE_CHANGED
@@ -14,7 +15,7 @@ import com.illu.demo.ui.web.WebActivity
 import kotlinx.android.synthetic.main.fragment_square.*
 import kotlinx.android.synthetic.main.include_reload.*
 
-class SquareFragment : BaseVmFragment<SquareViewModel>() {
+class SquareFragment : BaseVmFragment<SquareViewModel>(), ScrollToTop {
 
     private lateinit var mAdapter: SimpleArticleAdapter
 
@@ -90,5 +91,9 @@ class SquareFragment : BaseVmFragment<SquareViewModel>() {
                 mViewModel.updateItemCollectState(it)
             })
         }
+    }
+
+    override fun scrollToTop() {
+        recyclerView.smoothScrollToPosition(0)
     }
 }

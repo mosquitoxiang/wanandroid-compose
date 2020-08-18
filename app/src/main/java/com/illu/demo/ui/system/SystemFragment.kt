@@ -8,12 +8,14 @@ import com.illu.demo.base.BaseVmFragment
 import com.illu.baselibrary.utils.LogUtil
 import com.illu.demo.R
 import com.illu.demo.base.BaseFragmentPagerAdapter
+import com.illu.demo.common.ScrollToTop
 import com.illu.demo.ui.MainActivity
 import com.illu.demo.ui.home.project.CategoryBean
 import com.illu.demo.ui.system.pager.SystemPagerFragment
 import kotlinx.android.synthetic.main.fragment_system.*
+import kotlinx.android.synthetic.main.include_reload.*
 
-class SystemFragment : BaseVmFragment<SystemViewModel>() {
+class SystemFragment : BaseVmFragment<SystemViewModel>(), ScrollToTop {
 
     companion object {
         fun instance() = SystemFragment()
@@ -28,10 +30,12 @@ class SystemFragment : BaseVmFragment<SystemViewModel>() {
     override fun getLayoutId(): Int = R.layout.fragment_system
 
     override fun initView() {
-
+        btnReload.setOnClickListener {
+            mViewModel.getCategory()
+        }
     }
 
-    override fun initData() {
+    override fun lazyLoadData() {
         mViewModel.getCategory()
     }
 
@@ -73,5 +77,10 @@ class SystemFragment : BaseVmFragment<SystemViewModel>() {
         )
         viewPager.offscreenPageLimit = titles.size
         tabLayout.setupWithViewPager(viewPager)
+    }
+
+    override fun scrollToTop() {
+        if (fragments.isEmpty() || viewPager == null) return
+        fragments[viewPager.currentItem].scrollToTop()
     }
 }

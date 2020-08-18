@@ -5,14 +5,17 @@ import com.google.android.material.appbar.AppBarLayout
 import com.illu.demo.base.BaseVmFragment
 import com.illu.demo.R
 import com.illu.demo.base.BaseFragmentPagerAdapter
+import com.illu.demo.common.ScrollToTop
 import com.illu.demo.ui.MainActivity
 import com.illu.demo.ui.home.gzh.GzhFragment
 import com.illu.demo.ui.home.hot.HotFragment
 import com.illu.demo.ui.home.project.ProjectFragment
 import com.illu.demo.ui.home.square.SquareFragment
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.appBarLayout
+import kotlinx.android.synthetic.main.fragment_home.tabLayout
 
-class HomeFragment : BaseVmFragment<HomeViewModel>() {
+class HomeFragment : BaseVmFragment<HomeViewModel>(), ScrollToTop {
 
     private lateinit var fragments: List<Fragment>
     private var currentOffset = 0
@@ -39,13 +42,13 @@ class HomeFragment : BaseVmFragment<HomeViewModel>() {
             getString(R.string.project),
             getString(R.string.gzh)
         )
-        vp.adapter = BaseFragmentPagerAdapter(
+        viewPager.adapter = BaseFragmentPagerAdapter(
             fm = childFragmentManager,
             fragments = fragments,
             titles = titles
         )
-        vp.offscreenPageLimit = fragments.size
-        tabLayout.setupWithViewPager(vp)
+        viewPager.offscreenPageLimit = fragments.size
+        tabLayout.setupWithViewPager(viewPager)
 
         appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
             if (activity is MainActivity && this.currentOffset != verticalOffset) {
@@ -53,6 +56,15 @@ class HomeFragment : BaseVmFragment<HomeViewModel>() {
                 currentOffset = verticalOffset
             }
         })
+
+    }
+
+    override fun scrollToTop() {
+        if (!this::fragments.isInitialized) return
+        val currentFragment = fragments[viewPager.currentItem]
+        if (currentFragment is ScrollToTop && currentFragment.isVisible) {
+            currentFragment.scrollToTop()
+        }
     }
 
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import com.illu.baselibrary.core.ActivityHelper
 import com.illu.demo.R
 import com.illu.demo.base.BaseVmFragment
+import com.illu.demo.common.ScrollToTop
 import com.illu.demo.common.bus.Bus
 import com.illu.demo.common.bus.USER_COLLECT_UPDATE
 import com.illu.demo.common.bus.USER_LOGIN_STATE_CHANGED
@@ -15,7 +16,7 @@ import com.illu.demo.ui.home.square.SimpleArticleAdapter
 import com.illu.demo.ui.web.WebActivity
 import kotlinx.android.synthetic.main.fragment_gzh.*
 
-class GzhFragment : BaseVmFragment<GzhViewModel>() {
+class GzhFragment : BaseVmFragment<GzhViewModel>(), ScrollToTop {
 
     companion object {
         fun instance() = GzhFragment()
@@ -101,5 +102,9 @@ class GzhFragment : BaseVmFragment<GzhViewModel>() {
 
     override fun lazyLoadData() {
         mViewModel.requestData()
+    }
+
+    override fun scrollToTop() {
+        rvRight.smoothScrollToPosition(0)
     }
 }

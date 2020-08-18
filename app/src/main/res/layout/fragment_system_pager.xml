@@ -15,6 +15,7 @@
         android:orientation="horizontal"
         android:paddingTop="10dp"
         android:visibility="visible"
+        tools:listitem="@layout/item_system_category_tag"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

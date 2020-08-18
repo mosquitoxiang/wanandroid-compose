@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import com.illu.baselibrary.core.ActivityHelper
 import com.illu.demo.R
 import com.illu.demo.base.BaseVmFragment
+import com.illu.demo.common.ScrollToTop
 import com.illu.demo.common.bus.Bus
 import com.illu.demo.common.bus.USER_COLLECT_UPDATE
 import com.illu.demo.common.bus.USER_LOGIN_STATE_CHANGED
@@ -17,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_project.*
 import kotlinx.android.synthetic.main.include_reload.*
 
 
-class ProjectFragment : BaseVmFragment<ProjectViewModel>() {
+class ProjectFragment : BaseVmFragment<ProjectViewModel>(), ScrollToTop {
 
     private lateinit var mTreeAdapter: CategoryAdapter
     private lateinit var mArticleAdapter: ArticleAdapter
@@ -38,10 +39,10 @@ class ProjectFragment : BaseVmFragment<ProjectViewModel>() {
         }
         mArticleAdapter = ArticleAdapter().apply {
             setLoadMoreView(CommonLoadMoreView())
-            bindToRecyclerView(recycleview)
+            bindToRecyclerView(recyclerView)
             setOnLoadMoreListener({
                 mViewModel.loadMoreData()
-            }, recycleview)
+            }, recyclerView)
             setOnItemClickListener { _, _, position ->
                 val article = mArticleAdapter.data[position]
                 ActivityHelper.start(WebActivity::class.java, mapOf(WebActivity.ARTICLE_DATA to article))
@@ -103,6 +104,10 @@ class ProjectFragment : BaseVmFragment<ProjectViewModel>() {
                 mViewModel.updateItemCollectState(it)
             })
         }
+    }
+
+    override fun scrollToTop() {
+        recyclerView.smoothScrollToPosition(0)
     }
 
 }

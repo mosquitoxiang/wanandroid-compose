@@ -3,9 +3,11 @@ package com.illu.demo.ui.home.square
 import androidx.core.view.isVisible
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
+import com.chad.library.adapter.base.loadmore.LoadMoreView
 import com.illu.demo.R
 import com.illu.demo.bean.ArticleBean
 import kotlinx.android.synthetic.main.item_article_simple.view.*
+import java.util.*
 
 class SimpleArticleAdapter(layoutId: Int = R.layout.item_article_simple) :
     BaseQuickAdapter<ArticleBean, BaseViewHolder>(layoutId){

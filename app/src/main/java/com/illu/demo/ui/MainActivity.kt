@@ -7,6 +7,7 @@ import com.google.android.material.animation.AnimationUtils
 import com.illu.demo.base.BaseActivity
 import com.illu.baselibrary.utils.showToast
 import com.illu.demo.R
+import com.illu.demo.common.ScrollToTop
 import com.illu.demo.ui.find.FindFragment
 import com.illu.demo.ui.home.HomeFragment
 import com.illu.demo.ui.mine.MineFragment
@@ -39,19 +40,19 @@ class MainActivity : BaseActivity() {
                 showFragment(menuItem.itemId)
                 true
             }
-//            setOnNavigationItemReselectedListener { menuItem ->
-//                val fragment = fragments[menuItem.itemId]
-//                if (fragment is ScrollToTop) {
-//                    fragment.scrollToTop()
-//                }
-//            }
+            setOnNavigationItemReselectedListener { menuItem ->
+                val fragment = fragments[menuItem.itemId]
+                if (fragment is ScrollToTop) {
+                    fragment.scrollToTop()
+                }
+            }
         }
 
-//        if (savedInstanceState == null) {
+        if (savedInstanceState == null) {
             val initialItemId = R.id.home
             bottomNav.selectedItemId = initialItemId
-//            showFragment(initialItemId)
-//        }
+            showFragment(initialItemId)
+        }
     }
 
     override fun initView() {}

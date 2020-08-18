@@ -7,6 +7,7 @@ import com.illu.baselibrary.core.ActivityHelper
 import com.illu.baselibrary.utils.LogUtil
 import com.illu.demo.R
 import com.illu.demo.base.BaseVmFragment
+import com.illu.demo.common.ScrollToTop
 import com.illu.demo.common.bus.Bus
 import com.illu.demo.common.bus.USER_COLLECT_UPDATE
 import com.illu.demo.common.bus.USER_LOGIN_STATE_CHANGED
@@ -14,9 +15,10 @@ import com.illu.demo.common.loadmore.CommonLoadMoreView
 import com.illu.demo.common.loadmore.LoadMoreStatus
 import com.illu.demo.ui.web.WebActivity
 import kotlinx.android.synthetic.main.fragment_hot.*
+import kotlinx.android.synthetic.main.fragment_hot.reloadView
 import kotlinx.android.synthetic.main.include_reload.*
 
-class HotFragment : BaseVmFragment<HotViewModel>() {
+class HotFragment : BaseVmFragment<HotViewModel>(), ScrollToTop {
 
     companion object {
         fun instance() = HotFragment()
@@ -30,17 +32,17 @@ class HotFragment : BaseVmFragment<HotViewModel>() {
 
     @SuppressLint("ResourceAsColor")
     override fun initView() {
-        swiperRefreshLayout.run {
+        swipeRefreshLayout.run {
             setColorSchemeResources(R.color.textColorPrimary)
             setProgressBackgroundColorSchemeResource(R.color.bgColorPrimary)
             setOnRefreshListener { mViewModel.refreshArticlelist() }
         }
         mAdapter = ArticleAdapter().apply {
             setLoadMoreView(CommonLoadMoreView())
-            bindToRecyclerView(recycleView)
+            bindToRecyclerView(recyclerView)
             setOnLoadMoreListener({
                 mViewModel.loadMoreArticleList()
-            }, recycleView)
+            }, recyclerView)
             setOnItemClickListener { _, _, position ->
                 val article = mAdapter.data[position]
                 ActivityHelper.start(
@@ -72,7 +74,7 @@ class HotFragment : BaseVmFragment<HotViewModel>() {
                 mAdapter.setNewData(it)
             })
             refreshStatus.observe(viewLifecycleOwner, Observer {
-                swiperRefreshLayout.isRefreshing = it
+                swipeRefreshLayout.isRefreshing = it
             })
             loadMoreStatus.observe(viewLifecycleOwner, Observer {
                 when (it) {
@@ -96,6 +98,10 @@ class HotFragment : BaseVmFragment<HotViewModel>() {
 
     override fun lazyLoadData() {
         mViewModel.refreshArticlelist()
+    }
+
+    override fun scrollToTop() {
+        recyclerView.smoothScrollToPosition(0)
     }
 
 }
