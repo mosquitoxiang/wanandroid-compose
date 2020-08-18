@@ -31,6 +31,37 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    signingConfigs {
+        debug {
+            try {
+                storeFile file("wanandroid.jks")
+                storePassword "123456"
+                keyAlias "wanandroid"
+                keyPassword "123456"
+                v1SigningEnabled true
+                v2SigningEnabled false
+            }
+            catch (ex) {
+                ex.printStackTrace()
+                throw new InvalidUserDataException("秘钥用户名或密码错误${ex.getMessage()}")
+            }
+        }
+        release {
+            try {
+                storeFile file("wanandroid.jks")
+                storePassword "123456"
+                keyAlias "wanandroid"
+                keyPassword "123456"
+                v1SigningEnabled true
+                v2SigningEnabled false
+            }
+            catch (ex) {
+                ex.printStackTrace()
+                throw new InvalidUserDataException("秘钥用户名或密码错误")
+            }
+        }
+    }
 }
 
 dependencies {

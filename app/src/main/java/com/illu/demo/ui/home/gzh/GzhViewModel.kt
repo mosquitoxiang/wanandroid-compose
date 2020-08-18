@@ -1,17 +1,14 @@
 package com.illu.demo.ui.home.gzh
 
 import androidx.lifecycle.MutableLiveData
-import com.chad.library.adapter.base.loadmore.LoadMoreView
 import com.illu.demo.base.BaseViewModel
 import com.illu.demo.bean.ArticleBean
-import com.illu.demo.bean.PageBean
 import com.illu.demo.common.UserManager
 import com.illu.demo.common.bus.Bus
 import com.illu.demo.common.bus.USER_COLLECT_UPDATE
 import com.illu.demo.common.isLogin
 import com.illu.demo.common.loadmore.LoadMoreStatus
-import com.illu.demo.net.HttpUtils
-import com.illu.demo.ui.home.project.ProjectBean
+import com.illu.demo.ui.home.project.CategoryBean
 
 class GzhViewModel : BaseViewModel() {
 
@@ -24,7 +21,7 @@ class GzhViewModel : BaseViewModel() {
     val reloadStatus = MutableLiveData<Boolean>()
     val checkedPosition = MutableLiveData<Int>()
     val loadingMoreStatus = MutableLiveData<LoadMoreStatus>()
-    val authorList = MutableLiveData<MutableList<ProjectBean>>()
+    val authorList = MutableLiveData<MutableList<CategoryBean>>()
     val articleList = MutableLiveData<MutableList<ArticleBean>>()
 
     private var page = INITIAL_PAGE

@@ -3,7 +3,7 @@ package com.illu.demo.net
 import com.illu.demo.bean.ArticleBean
 import com.illu.demo.bean.PageBean
 import com.illu.demo.bean.UserInfo
-import com.illu.demo.ui.home.project.ProjectBean
+import com.illu.demo.ui.home.project.CategoryBean
 import com.illu.demo.ui.mine.rank.minepoints.MinePointsBean
 import com.illu.demo.ui.mine.rank.minepoints.MinePointsListBean
 import com.illu.demo.ui.mine.rank.pointsrank.Rank
@@ -36,7 +36,7 @@ interface ApiService {
     suspend fun getSquareData(@Path("page") page: Int): ApiResult<PageBean<ArticleBean>>
 
     @GET("/project/tree/json")
-    suspend fun getTreeData(): ApiResult<List<ProjectBean>>
+    suspend fun getTreeData(): ApiResult<List<CategoryBean>>
 
     @GET("/project/list/{page}/json")
     suspend fun getChildrenData(
@@ -45,7 +45,7 @@ interface ApiService {
     ): ApiResult<PageBean<ArticleBean>>
 
     @GET("/wxarticle/chapters/json")
-    suspend fun getGzhName(): ApiResult<List<ProjectBean>>
+    suspend fun getGzhName(): ApiResult<List<CategoryBean>>
 
     @GET("wxarticle/list/{id}/{page}/json")
     suspend fun getGzhArticle(
@@ -70,4 +70,13 @@ interface ApiService {
 
     @GET("/coin/rank/{page}/json")
     suspend fun getPointsRank(@Path("page") page: Int): ApiResult<PageBean<Rank>>
+
+    @GET("/tree/json")
+    suspend fun getSystem(): ApiResult<MutableList<CategoryBean>>
+
+    @GET("/article/list/{page}/json")
+    suspend fun getSystemArticle(
+        @Path("page") page: Int,
+        @Query("cid") id: Int
+    ): ApiResult<PageBean<ArticleBean>>
 }

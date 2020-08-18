@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.include_reload.*
 
 class ProjectFragment : BaseVmFragment<ProjectViewModel>() {
 
-    private lateinit var mTreeAdapter: ProjectTreeAdapter
+    private lateinit var mTreeAdapter: CategoryAdapter
     private lateinit var mArticleAdapter: ArticleAdapter
 
     companion object {
@@ -30,7 +30,7 @@ class ProjectFragment : BaseVmFragment<ProjectViewModel>() {
     override fun getLayoutId(): Int = R.layout.fragment_project
 
     override fun initView() {
-        mTreeAdapter = ProjectTreeAdapter().apply {
+        mTreeAdapter = CategoryAdapter().apply {
             bindToRecyclerView(rvCategory)
             onCheckedListener = {
                 mViewModel.changePosition(it)

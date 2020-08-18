@@ -28,12 +28,13 @@ class AppRepository {
 
     suspend fun unCollect(id: Int) = HttpUtils.service.uncollect(id).apiData()
 
-    //获取个人积分列表
     suspend fun getMinePointsList(page: Int) = HttpUtils.service.getMinePointsList(page).apiData()
 
-    //获取个人总积分
     suspend fun getMinePoints() = HttpUtils.service.getMinePoints().apiData()
 
-    //获取积分排行榜
     suspend fun getPointsRank(page: Int) = HttpUtils.service.getPointsRank(page).apiData()
+
+    suspend fun getCategory() = HttpUtils.service.getSystem().apiData()
+
+    suspend fun getSystemArticle(page: Int, id: Int) = HttpUtils.service.getSystemArticle(page, id).apiData()
 }

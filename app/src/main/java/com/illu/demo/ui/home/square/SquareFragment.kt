@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.include_reload.*
 
 class SquareFragment : BaseVmFragment<SquareViewModel>() {
 
-    private lateinit var mAdapter: SquareAdapter
+    private lateinit var mAdapter: SimpleArticleAdapter
 
     companion object {
         fun instance() = SquareFragment()
@@ -27,7 +27,7 @@ class SquareFragment : BaseVmFragment<SquareViewModel>() {
     override fun getLayoutId(): Int = R.layout.fragment_square
 
     override fun initView() {
-        mAdapter = SquareAdapter().apply {
+        mAdapter = SimpleArticleAdapter().apply {
             setLoadMoreView(CommonLoadMoreView())
             bindToRecyclerView(recyclerView)
             setOnLoadMoreListener({

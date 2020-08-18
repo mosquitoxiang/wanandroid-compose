@@ -5,9 +5,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.illu.demo.R
 import com.illu.demo.bean.ArticleBean
-import kotlinx.android.synthetic.main.item_square.view.*
+import kotlinx.android.synthetic.main.item_article_simple.view.*
 
-class SquareAdapter(layoutId: Int = R.layout.item_square) :
+class SimpleArticleAdapter(layoutId: Int = R.layout.item_article_simple) :
     BaseQuickAdapter<ArticleBean, BaseViewHolder>(layoutId){
 
     override fun convert(helper: BaseViewHolder, item: ArticleBean) {

@@ -8,7 +8,6 @@ import com.illu.demo.common.bus.Bus
 import com.illu.demo.common.bus.USER_COLLECT_UPDATE
 import com.illu.demo.common.isLogin
 import com.illu.demo.common.loadmore.LoadMoreStatus
-import com.illu.demo.net.HttpUtils
 
 class ProjectViewModel : BaseViewModel() {
 
@@ -20,7 +19,7 @@ class ProjectViewModel : BaseViewModel() {
     val loadMoreStatus = MutableLiveData<LoadMoreStatus>()
     val refreshStatus = MutableLiveData<Boolean>()
     val reloadStatus = MutableLiveData<Boolean>()
-    val treeListLiveData = MutableLiveData<MutableList<ProjectBean>>()
+    val treeListLiveData = MutableLiveData<MutableList<CategoryBean>>()
     val articleList = MutableLiveData<MutableList<ArticleBean>>()
     val checkPositionLiveData = MutableLiveData<Int>()
 

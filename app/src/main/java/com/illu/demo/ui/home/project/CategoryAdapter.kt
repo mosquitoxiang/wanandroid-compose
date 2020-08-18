@@ -8,13 +8,13 @@ import com.illu.baselibrary.ext.dpToPxInt
 import com.illu.demo.R
 import kotlinx.android.synthetic.main.item_category_sub.view.*
 
-class ProjectTreeAdapter(layoutRes: Int = R.layout.item_category_sub) :
-    BaseQuickAdapter<ProjectBean, BaseViewHolder>(layoutRes) {
+class CategoryAdapter(layoutRes: Int = R.layout.item_category_sub) :
+    BaseQuickAdapter<CategoryBean, BaseViewHolder>(layoutRes) {
 
     private var checkedPosition = 0
     var onCheckedListener: ((position: Int) -> Unit)? = null
 
-    override fun convert(helper: BaseViewHolder, item: ProjectBean) {
+    override fun convert(helper: BaseViewHolder, item: CategoryBean) {
         helper.itemView.run {
             ctvCategory.text = item.name
             ctvCategory.isChecked = checkedPosition == helper.adapterPosition

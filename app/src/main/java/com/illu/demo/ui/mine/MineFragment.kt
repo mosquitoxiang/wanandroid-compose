@@ -7,6 +7,7 @@ import com.illu.baselibrary.utils.LogUtil
 import com.illu.demo.base.BaseVmFragment
 import com.illu.demo.R
 import com.illu.demo.common.UserManager
+import com.illu.demo.common.isLogin
 import com.illu.demo.ui.login.LoginActivity
 import com.illu.demo.ui.mine.collection.CollectionActivity
 import com.illu.demo.ui.mine.rank.minepoints.MinePointsActivity
@@ -26,7 +27,7 @@ class MineFragment : BaseVmFragment<MineViewModel>() {
 
     @SuppressLint("SetTextI18n")
     override fun initView() {
-        checkLogin{
+        if (isLogin()) {
             tvName.apply {
                 text = UserManager.getUserInfo()?.username
                 visibility = View.VISIBLE

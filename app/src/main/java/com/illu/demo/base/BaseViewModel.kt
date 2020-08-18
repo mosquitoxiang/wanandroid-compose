@@ -56,7 +56,7 @@ open class BaseViewModel : ViewModel(){
         return viewModelScope.async { block.invoke() }
     }
 
-    protected fun cancelJo(job: Job?) {
+    protected fun cancelJob(job: Job?) {
         if (job != null && job.isActive && !job.isCompleted && !job.isCancelled) {
             job.cancel()
         }

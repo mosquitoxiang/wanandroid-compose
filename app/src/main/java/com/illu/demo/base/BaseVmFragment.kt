@@ -16,6 +16,8 @@ abstract class BaseVmFragment <VM : BaseViewModel> : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         initViewModel()
         observe()
+        initView()
+        initData()
     }
 
     override fun onResume() {
@@ -47,10 +49,10 @@ abstract class BaseVmFragment <VM : BaseViewModel> : BaseFragment() {
     }
 
     open fun observe() {
-        mViewModel.loginStatusInvalid.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                ActivityHelper.start(LoginActivity::class.java)
-            }
-        })
+//        mViewModel.loginStatusInvalid.observe(viewLifecycleOwner, Observer {
+//            if (it) {
+//                ActivityHelper.start(LoginActivity::class.java)
+//            }
+//        })
     }
 }

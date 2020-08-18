@@ -1,14 +1,7 @@
 package com.illu.demo.ui.home.gzh
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
-import com.chad.library.adapter.base.loadmore.LoadMoreView
 import com.illu.baselibrary.core.ActivityHelper
 import com.illu.demo.R
 import com.illu.demo.base.BaseVmFragment
@@ -17,8 +10,8 @@ import com.illu.demo.common.bus.USER_COLLECT_UPDATE
 import com.illu.demo.common.bus.USER_LOGIN_STATE_CHANGED
 import com.illu.demo.common.loadmore.CommonLoadMoreView
 import com.illu.demo.common.loadmore.LoadMoreStatus
-import com.illu.demo.ui.home.project.ProjectTreeAdapter
-import com.illu.demo.ui.home.square.SquareAdapter
+import com.illu.demo.ui.home.project.CategoryAdapter
+import com.illu.demo.ui.home.square.SimpleArticleAdapter
 import com.illu.demo.ui.web.WebActivity
 import kotlinx.android.synthetic.main.fragment_gzh.*
 
@@ -28,21 +21,21 @@ class GzhFragment : BaseVmFragment<GzhViewModel>() {
         fun instance() = GzhFragment()
     }
 
-    private lateinit var mLeftAdapter: ProjectTreeAdapter
-    private lateinit var mRightAdapter: SquareAdapter
+    private lateinit var mLeftAdapter: CategoryAdapter
+    private lateinit var mRightAdapter: SimpleArticleAdapter
 
     override fun viewModelClass(): Class<GzhViewModel> = GzhViewModel::class.java
 
     override fun getLayoutId(): Int = R.layout.fragment_gzh
 
     override fun initView() {
-        mLeftAdapter = ProjectTreeAdapter().apply {
+        mLeftAdapter = CategoryAdapter().apply {
             bindToRecyclerView(rvLeft)
             onCheckedListener = {
                 mViewModel.changeData(it)
             }
         }
-        mRightAdapter = SquareAdapter().apply {
+        mRightAdapter = SimpleArticleAdapter().apply {
             setLoadMoreView(CommonLoadMoreView())
             bindToRecyclerView(rvRight)
             setOnLoadMoreListener({

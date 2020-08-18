@@ -18,8 +18,6 @@ abstract class BaseFragment : Fragment(){
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initView()
-        initData()
     }
 
     abstract fun getLayoutId(): Int

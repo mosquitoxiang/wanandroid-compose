@@ -98,13 +98,4 @@ class HotFragment : BaseVmFragment<HotViewModel>() {
         mViewModel.refreshArticlelist()
     }
 
-    override fun onDestroy() {
-        LogUtil.d("ondestroy")
-        super.onDestroy()
-    }
-
-    override fun onPause() {
-        LogUtil.d("onPause")
-        super.onPause()
-    }
 }
