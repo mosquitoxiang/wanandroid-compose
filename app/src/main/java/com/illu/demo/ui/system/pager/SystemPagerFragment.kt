@@ -101,6 +101,7 @@ class SystemPagerFragment : BaseVmFragment<SystemPagerViewModel>(), ScrollToTop 
         mViewModel.run {
             articleList.observe(viewLifecycleOwner, Observer {
                 mArticleAdapter.setNewData(it)
+                mArticleAdapter.disableLoadMoreIfNotFullPage(rvArticle)
             })
             reloadStatus.observe(viewLifecycleOwner, Observer {
                 reloadView.isVisible = it
