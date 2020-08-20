@@ -43,11 +43,11 @@ class GzhFragment : BaseVmFragment<GzhViewModel>(), ScrollToTop {
                 mViewModel.loadMoreData()
             }, rvRight)
             setOnItemClickListener { _, _, position ->
-                val article = mRightAdapter.data[position]
-                ActivityHelper.start(
-                    WebActivity::class.java,
-                    mapOf(WebActivity.ARTICLE_DATA to article)
-                )
+//                val article = mRightAdapter.data[position]
+//                ActivityHelper.start(
+//                    WebActivity::class.java,
+//                    mapOf(WebActivity.ARTICLE_DATA to article)
+//                )
             }
             setOnItemChildClickListener { _, view, position ->
                 val article = mRightAdapter.data[position]

@@ -4,10 +4,12 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.illu.baselibrary.core.ActivityHelper
 import com.illu.baselibrary.utils.LogUtil
 import com.illu.demo.base.BaseVmFragment
 import com.illu.demo.R
 import com.illu.demo.ui.MainActivity
+import com.illu.demo.ui.web.WebActivity
 import kotlinx.android.synthetic.main.fragment_navigation.*
 import kotlinx.android.synthetic.main.include_reload.*
 
@@ -31,9 +33,14 @@ class NavigationFragment : BaseVmFragment<NavigationViewModel>() {
         }
         navAdapter = NavAdapter().apply {
             bindToRecyclerView(rv)
+            onItemTagClickListener = {
+                ActivityHelper.start(
+                    WebActivity::class.java,
+                    mapOf(WebActivity.ARTICLE_DATA to it)
+                )
+            }
         }
         rv.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
-            LogUtil.d("scrollY:${scrollY} oldScrollY:${oldScrollY}")
             if (activity is MainActivity && scrollY != oldScrollY) {
                 (activity as MainActivity).animateBottomNavigationView(scrollY < oldScrollY)
             }

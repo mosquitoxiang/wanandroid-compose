@@ -73,8 +73,7 @@ class SystemPagerFragment : BaseVmFragment<SystemPagerViewModel>(), ScrollToTop 
                 val article = mArticleAdapter.data[position]
                 ActivityHelper.start(
                     WebActivity::class.java,
-                    mapOf(WebActivity.ARTICLE_DATA to article))
-            }
+                    mapOf(WebActivity.ARTICLE_DATA to article))            }
             setOnItemChildClickListener { _, view, position ->
                 val article = mArticleAdapter.data[position]
                 if (view.id == R.id.iv_collect && checkLogin()) {

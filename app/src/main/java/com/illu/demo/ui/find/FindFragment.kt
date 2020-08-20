@@ -3,8 +3,12 @@ package com.illu.demo.ui.find
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
+import com.illu.baselibrary.core.ActivityHelper
 import com.illu.demo.base.BaseVmFragment
 import com.illu.demo.R
+import com.illu.demo.bean.ArticleBean
+import com.illu.demo.ui.MainActivity
+import com.illu.demo.ui.web.WebActivity
 import com.youth.banner.indicator.CircleIndicator
 import com.youth.banner.util.BannerUtils
 import kotlinx.android.synthetic.main.fragment_find.*
@@ -29,6 +33,18 @@ class FindFragment : BaseVmFragment<FindViewModel>() {
         bannerView.addBannerLifecycleObserver(this)
         mHotKeyAdapter = HotKeyAdapter().apply {
             bindToRecyclerView(rvHotWord)
+            setOnItemClickListener { _, _, position ->
+//                val article = mHotKeyAdapter.data[position]
+//                ActivityHelper.start(
+//                    WebActivity::class.java,
+//                    mapOf(WebActivity.ARTICLE_DATA to article)
+//                )
+            }
+        }
+        nestedScollView.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+            if (activity is MainActivity && scrollY != oldScrollY) {
+                (activity as MainActivity).animateBottomNavigationView(scrollY < oldScrollY)
+            }
         }
     }
 
@@ -52,7 +68,17 @@ class FindFragment : BaseVmFragment<FindViewModel>() {
                 tvFrquently.isGone = it.isEmpty()
                 tagFlowLayout.adapter = TagAdapter(it)
                 tagFlowLayout.setOnTagClickListener { _, position, _ ->
-                    //todo
+                    val article = it[position]
+                    ActivityHelper.start(
+                        WebActivity::class.java,
+                        mapOf(
+                            WebActivity.ARTICLE_DATA to ArticleBean
+                                (
+                                title = article.name,
+                                link = article.link
+                            )
+                        )
+                    )
                     false
                 }
             })
