@@ -1,8 +1,13 @@
 package com.illu.demo.ui.find
 
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import com.illu.demo.base.BaseVmFragment
-import com.illu.baselibrary.utils.LogUtil
 import com.illu.demo.R
+import com.youth.banner.indicator.CircleIndicator
+import com.youth.banner.util.BannerUtils
+import kotlinx.android.synthetic.main.fragment_find.*
 
 class FindFragment : BaseVmFragment<FindViewModel>() {
 
@@ -10,14 +15,61 @@ class FindFragment : BaseVmFragment<FindViewModel>() {
         fun instance() = FindFragment()
     }
 
+    private lateinit var mHotKeyAdapter: HotKeyAdapter
+
     override fun viewModelClass(): Class<FindViewModel> = FindViewModel::class.java
 
     override fun getLayoutId(): Int = R.layout.fragment_find
 
-    override fun initView() {
-        LogUtil.d("FindFragment")
+    override fun lazyLoadData() {
+        mViewModel.refreshData()
     }
 
-    override fun initData() {
+    override fun initView() {
+        bannerView.addBannerLifecycleObserver(this)
+        mHotKeyAdapter = HotKeyAdapter().apply {
+            bindToRecyclerView(rvHotWord)
+        }
+    }
+
+    override fun observe() {
+        super.observe()
+        mViewModel.run {
+            reloadStatus.observe(viewLifecycleOwner, Observer {
+                reloadView.isVisible = it
+            })
+            refreshStatus.observe(viewLifecycleOwner, Observer {
+                swipeRefreshLayout.isRefreshing = it
+            })
+            bannerList.observe(viewLifecycleOwner, Observer {
+                setBanner(it)
+            })
+            hotKeyList.observe(viewLifecycleOwner, Observer {
+                tvHotWordTitle.isGone = it.isEmpty()
+                mHotKeyAdapter.setNewData(it)
+            })
+            commonWebList.observe(viewLifecycleOwner, Observer {
+                tvFrquently.isGone = it.isEmpty()
+                tagFlowLayout.adapter = TagAdapter(it)
+                tagFlowLayout.setOnTagClickListener { _, position, _ ->
+                    //todo
+                    false
+                }
+            })
+        }
+        swipeRefreshLayout.apply {
+            setColorSchemeResources(R.color.textColorPrimary)
+            setProgressBackgroundColorSchemeResource(R.color.bgColorPrimary)
+            setOnRefreshListener { mViewModel.refreshData() }
+        }
+    }
+
+    private fun setBanner(banners: List<Banner>) {
+        bannerView.run {
+            adapter = ImageAdapter(banners)
+            setIndicator(CircleIndicator(requireContext()))
+            setIndicatorSpace(BannerUtils.dp2px(4F).toInt())
+            setIndicatorRadius(0)
+        }
     }
 }

@@ -3,10 +3,14 @@ package com.illu.demo.net
 import com.illu.demo.bean.ArticleBean
 import com.illu.demo.bean.PageBean
 import com.illu.demo.bean.UserInfo
+import com.illu.demo.ui.find.Banner
+import com.illu.demo.ui.find.CommonWeb
+import com.illu.demo.ui.find.HotKey
 import com.illu.demo.ui.home.project.CategoryBean
 import com.illu.demo.ui.mine.rank.minepoints.MinePointsBean
 import com.illu.demo.ui.mine.rank.minepoints.MinePointsListBean
 import com.illu.demo.ui.mine.rank.pointsrank.Rank
+import com.illu.demo.ui.navigation.Nav
 import retrofit2.http.*
 
 interface ApiService {
@@ -79,4 +83,16 @@ interface ApiService {
         @Path("page") page: Int,
         @Query("cid") id: Int
     ): ApiResult<PageBean<ArticleBean>>
+
+    @GET("/banner/json")
+    suspend fun getBanner(): ApiResult<MutableList<Banner>>
+
+    @GET("/friend/json")
+    suspend fun getCommonWeb(): ApiResult<MutableList<CommonWeb>>
+
+    @GET("/hotkey/json")
+    suspend fun getHotKey(): ApiResult<MutableList<HotKey>>
+
+    @GET("/navi/json")
+    suspend fun getNav(): ApiResult<MutableList<Nav>>
 }

@@ -37,4 +37,12 @@ class AppRepository {
     suspend fun getCategory() = HttpUtils.service.getSystem().apiData()
 
     suspend fun getSystemArticle(page: Int, id: Int) = HttpUtils.service.getSystemArticle(page, id).apiData()
+
+    suspend fun getBanner() = HttpUtils.service.getBanner().apiData()
+
+    suspend fun getCommonWeb() = HttpUtils.service.getCommonWeb().apiData()
+
+    suspend fun getHotKey() = HttpUtils.service.getHotKey().apiData()
+
+    suspend fun getNav() = HttpUtils.service.getNav().apiData()
 }
