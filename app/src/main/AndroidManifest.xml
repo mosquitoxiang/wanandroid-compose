@@ -16,6 +16,11 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:label">
         <activity
+            android:name=".ui.home.search.SearchActivity"
+            android:configChanges="keyboard|keyboardHidden|screenSize|fontScale|density|orientation"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".ui.mine.setting.SettingActivity"
             android:configChanges="keyboard|keyboardHidden|screenSize|fontScale|density|orientation"
             android:launchMode="singleTask"

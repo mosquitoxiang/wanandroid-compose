@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import androidx.core.app.ActivityOptionsCompat
 import com.illu.baselibrary.ext.putExtras
 import com.illu.baselibrary.lifecycles.BaseLifecycleCallbacks
 
@@ -30,7 +31,6 @@ object ActivityHelper {
         }
         currentActivity.startActivity(intent)
     }
-
 
     fun finish(vararg clazz: Class<out Activity>){
         activities.forEach { activity ->

@@ -1,7 +1,10 @@
 package com.illu.demo.ui.home
 
+import android.content.Intent
+import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.AppBarLayout
+import com.illu.baselibrary.core.ActivityHelper
 import com.illu.demo.base.BaseVmFragment
 import com.illu.demo.R
 import com.illu.demo.base.BaseFragmentPagerAdapter
@@ -10,6 +13,7 @@ import com.illu.demo.ui.MainActivity
 import com.illu.demo.ui.home.gzh.GzhFragment
 import com.illu.demo.ui.home.hot.HotFragment
 import com.illu.demo.ui.home.project.ProjectFragment
+import com.illu.demo.ui.home.search.SearchActivity
 import com.illu.demo.ui.home.square.SquareFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.appBarLayout
@@ -56,7 +60,12 @@ class HomeFragment : BaseVmFragment<HomeViewModel>(), ScrollToTop {
                 currentOffset = verticalOffset
             }
         })
-
+        toolbar.setOnClickListener {
+            val intent = Intent(activity, SearchActivity::class.java)
+            val bundle = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(requireActivity(), toolbar, "toolbar").toBundle()
+            startActivity(intent, bundle)
+        }
     }
 
     override fun scrollToTop() {
