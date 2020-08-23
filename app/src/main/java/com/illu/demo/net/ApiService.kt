@@ -95,4 +95,18 @@ interface ApiService {
 
     @GET("/navi/json")
     suspend fun getNav(): ApiResult<MutableList<Nav>>
+
+    @FormUrlEncoded
+    @POST("/article/query/{page}/json")
+    suspend fun search(
+        @Path("page") page: Int,
+        @Field("k") key: String
+    ): ApiResult<PageBean<ArticleBean>>
+
+    @FormUrlEncoded
+    @POST("/lg/user_article/add/json")
+    suspend fun share(
+        @Field("title") title: String,
+        @Field("link") link: String
+    ): ApiResult<Any>
 }

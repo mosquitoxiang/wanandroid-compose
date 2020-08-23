@@ -15,7 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@color/bgColorPrimary"
-            android:transitionName="toolbar"
             app:contentInsetStart="0dp"
             app:layout_scrollFlags="scroll|enterAlways">
 
@@ -29,7 +28,8 @@
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/shape_bg_search"
                 android:elevation="1dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:transitionName="llSearch">
 
                 <ImageView
                     android:layout_width="18dp"

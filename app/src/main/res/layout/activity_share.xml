@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.hjq.bar.TitleBar
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bgColorPrimary"
+        android:elevation="2dp"
+        app:backButton="true"
+        app:rightColor="@color/textColorPrimary"
+        app:rightTitle="提交"
+        app:title="分享文章" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bgColorPrimary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="标题"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="13sp" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/acetTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/shape_share_input"
+                android:gravity="start"
+                android:hint="请输入您要分享的文章标题，100字以内。"
+                android:lineSpacingExtra="4dp"
+                android:lines="2"
+                android:maxLength="100"
+                android:maxLines="3"
+                android:padding="8dp"
+                android:textColor="@color/textColorPrimary"
+                android:textColorHint="@color/textColorThird"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="链接"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="13sp" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/acetlink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/shape_share_input"
+                android:gravity="start"
+                android:hint="请输入您要分享的文章链接。"
+                android:imeOptions="actionDone"
+                android:lineSpacingExtra="4dp"
+                android:lines="3"
+                android:maxLines="3"
+                android:padding="8dp"
+                android:textColor="@color/textColorPrimary"
+                android:textColorHint="@color/textColorThird"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="分享人"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="13sp" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/acetSharePeople"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/shape_share_input"
+                android:enabled="false"
+                android:lineSpacingExtra="4dp"
+                android:lines="1"
+                android:maxLines="1"
+                android:padding="8dp"
+                android:textColor="@color/textColorPrimary"
+                android:textColorHint="@color/textColorThird"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="温馨提示"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:lineSpacingExtra="2dp"
+                android:text="1.只要是任何好文都可以分享哈，并不一定要是原创！投递的文章会进入广场tab；\n2.CSDN、掘金、简书等官方博客站点会直接通过，不需要审核；\n3.其他个人站点会进入审核阶段，不要投递任何无效链接，测试的请尽快删除，否则可能会对你的账号产生一定影响;\n4.目前处于测试阶段，如果你发现500等错误，可以向我提交日志，让我们一起使网站变得更好；\n5.由于本站只有我一个人开发与维护，会尽力保证24小时内审核，当然有可能哪天太累，会延期，请保持佛系&#8230;"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

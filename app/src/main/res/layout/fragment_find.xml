@@ -13,6 +13,7 @@
         android:background="@color/bgColorPrimary"
         android:elevation="2dp"
         app:backButton="false"
+        app:leftIcon="@drawable/ic_add_black_24dp"
         app:title="我的"
         app:titleColor="@color/textColorPrimary" />
 

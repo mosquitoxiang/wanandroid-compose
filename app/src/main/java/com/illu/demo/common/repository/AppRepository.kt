@@ -1,5 +1,7 @@
 package com.illu.demo.common.repository
 
+import com.illu.demo.common.room.History
+import com.illu.demo.common.room.RoomHelper
 import com.illu.demo.net.HttpUtils
 
 class AppRepository {
@@ -45,4 +47,14 @@ class AppRepository {
     suspend fun getHotKey() = HttpUtils.service.getHotKey().apiData()
 
     suspend fun getNav() = HttpUtils.service.getNav().apiData()
+
+    suspend fun search(page: Int, key: String) = HttpUtils.service.search(page, key).apiData()
+
+    suspend fun getHistory() = RoomHelper.queryHistory()
+
+    suspend fun addHistory(history: History) = RoomHelper.addHistory(history)
+
+    suspend fun deleteHistory(content: String) = RoomHelper.delete(content)
+
+    suspend fun share(title: String, link: String) = HttpUtils.service.share(title, link).apiData()
 }

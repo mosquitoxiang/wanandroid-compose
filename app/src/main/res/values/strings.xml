@@ -27,6 +27,7 @@
     <string name="no_name">匿名</string>
 
     <string name="level_rank">等级: %1$d\t\t\t排名: %2$d</string>
+    <string name="sharing_article">正在分享文章&#8230;</string>
 
 
 </resources>

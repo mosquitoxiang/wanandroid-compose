@@ -20,6 +20,7 @@ class NavigationFragment : BaseVmFragment<NavigationViewModel>() {
     }
 
     private lateinit var navAdapter: NavAdapter
+    private var currentPosition = 0
 
     override fun viewModelClass(): Class<NavigationViewModel> = NavigationViewModel::class.java
 
@@ -44,8 +45,15 @@ class NavigationFragment : BaseVmFragment<NavigationViewModel>() {
             if (activity is MainActivity && scrollY != oldScrollY) {
                 (activity as MainActivity).animateBottomNavigationView(scrollY < oldScrollY)
             }
+            tvFloatTitle.text = navAdapter.data[currentPosition].name
             val layoutManager = rv.layoutManager as LinearLayoutManager
-            tvFloatTitle.text = navAdapter.data[layoutManager.findFirstVisibleItemPosition()].name
+            val nextView = layoutManager.findViewByPosition(currentPosition + 1)
+            if (nextView != null) {
+                tvFloatTitle.y = if (nextView.top < tvFloatTitle.measuredHeight) {
+                    (nextView.top - tvFloatTitle.measuredHeight).toFloat()
+                } else 0f
+            }
+            currentPosition = layoutManager.findFirstVisibleItemPosition()
         }
         btnReload.setOnClickListener { mViewModel.refreshData() }
     }

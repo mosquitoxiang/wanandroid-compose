@@ -1,5 +1,6 @@
 package com.illu.demo.ui.find
 
+import android.view.View
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
@@ -8,6 +9,7 @@ import com.illu.demo.base.BaseVmFragment
 import com.illu.demo.R
 import com.illu.demo.bean.ArticleBean
 import com.illu.demo.ui.MainActivity
+import com.illu.demo.ui.find.share.ShareActivity
 import com.illu.demo.ui.web.WebActivity
 import com.youth.banner.indicator.CircleIndicator
 import com.youth.banner.util.BannerUtils
@@ -46,6 +48,7 @@ class FindFragment : BaseVmFragment<FindViewModel>() {
                 (activity as MainActivity).animateBottomNavigationView(scrollY < oldScrollY)
             }
         }
+        tb.setOnTitleBarListener(this)
     }
 
     override fun observe() {
@@ -96,6 +99,12 @@ class FindFragment : BaseVmFragment<FindViewModel>() {
             setIndicator(CircleIndicator(requireContext()))
             setIndicatorSpace(BannerUtils.dp2px(4F).toInt())
             setIndicatorRadius(0)
+        }
+    }
+
+    override fun onLeftClick(v: View?) {
+        checkLogin{
+            ActivityHelper.start(ShareActivity::class.java)
         }
     }
 }

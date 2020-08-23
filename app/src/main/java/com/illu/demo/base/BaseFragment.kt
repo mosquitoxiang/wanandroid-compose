@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.hjq.bar.OnTitleBarListener
 
-abstract class BaseFragment : Fragment(){
+abstract class BaseFragment : Fragment(), OnTitleBarListener{
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,4 +24,16 @@ abstract class BaseFragment : Fragment(){
     abstract fun getLayoutId(): Int
     abstract fun initView()
     open fun initData() {}
+
+    override fun onLeftClick(v: View?) {
+
+    }
+
+    override fun onTitleClick(v: View?) {
+
+    }
+
+    override fun onRightClick(v: View?) {
+
+    }
 }

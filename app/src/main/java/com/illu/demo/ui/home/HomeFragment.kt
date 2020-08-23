@@ -60,11 +60,13 @@ class HomeFragment : BaseVmFragment<HomeViewModel>(), ScrollToTop {
                 currentOffset = verticalOffset
             }
         })
-        toolbar.setOnClickListener {
-            val intent = Intent(activity, SearchActivity::class.java)
+        llSearch.setOnClickListener {
             val bundle = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(requireActivity(), toolbar, "toolbar").toBundle()
-            startActivity(intent, bundle)
+                .makeSceneTransitionAnimation(requireActivity(), toolbar, "llSearch").toBundle()
+            ActivityHelper.start(
+                clazz = SearchActivity::class.java,
+                bundle = bundle!!
+            )
         }
     }
 

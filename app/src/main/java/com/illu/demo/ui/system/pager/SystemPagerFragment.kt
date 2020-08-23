@@ -3,7 +3,9 @@ package com.illu.demo.ui.system.pager
 import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.illu.baselibrary.core.ActivityHelper
+import com.illu.baselibrary.ext.dpToPxInt
 import com.illu.baselibrary.utils.LogUtil
 import com.illu.demo.R
 import com.illu.demo.base.BaseVmFragment
@@ -39,7 +41,7 @@ class SystemPagerFragment : BaseVmFragment<SystemPagerViewModel>(), ScrollToTop 
     private lateinit var mCategoryAdapter: CategoryAdapter
     private lateinit var categoryList: List<CategoryBean>
 
-    private var checkedPosition = 0
+    var checkedPosition = 0
 
     override fun viewModelClass(): Class<SystemPagerViewModel> = SystemPagerViewModel::class.java
 
@@ -127,5 +129,14 @@ class SystemPagerFragment : BaseVmFragment<SystemPagerViewModel>(), ScrollToTop 
 
     override fun scrollToTop() {
         rvArticle.smoothScrollToPosition(0)
+    }
+
+    fun check(position: Int) {
+        if (position != checkedPosition) {
+            checkedPosition = position
+            mCategoryAdapter.check(position)
+            (rvCategory.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(position, 8f.dpToPxInt())
+            mViewModel.changePosition(categoryList[checkedPosition].id)
+        }
     }
 }

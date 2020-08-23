@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="1dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -21,12 +22,12 @@
             android:src="@drawable/ic_arrow_back_black_24dp" />
 
         <androidx.appcompat.widget.Toolbar
+            android:layout_marginHorizontal="5dp"
             android:id="@+id/toolbar"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
             android:background="@color/bgColorPrimary"
-            android:transitionName="toolbar"
             app:contentInsetStart="0dp"
             app:layout_scrollFlags="scroll|enterAlways">
 
@@ -37,6 +38,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:transitionName="llSearch"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/shape_bg_search"
                 android:elevation="1dp"
@@ -80,5 +82,9 @@
             android:background="@drawable/ic_search_black_24dp" />
     </LinearLayout>
 
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
