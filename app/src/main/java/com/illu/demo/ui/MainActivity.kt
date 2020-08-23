@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.ViewPropertyAnimator
 import androidx.fragment.app.Fragment
 import com.google.android.material.animation.AnimationUtils
+import com.illu.baselibrary.utils.LogUtil
 import com.illu.demo.base.BaseActivity
 import com.illu.baselibrary.utils.showToast
 import com.illu.demo.R

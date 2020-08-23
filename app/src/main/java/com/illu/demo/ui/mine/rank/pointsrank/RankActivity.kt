@@ -1,5 +1,6 @@
 package com.illu.demo.ui.mine.rank.pointsrank
 
+import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import com.illu.demo.R

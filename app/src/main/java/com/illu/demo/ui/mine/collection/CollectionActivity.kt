@@ -1,6 +1,5 @@
 package com.illu.demo.ui.mine.collection
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer

@@ -5,6 +5,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.AppBarLayout
 import com.illu.baselibrary.core.ActivityHelper
+import com.illu.baselibrary.utils.LogUtil
 import com.illu.demo.base.BaseVmFragment
 import com.illu.demo.R
 import com.illu.demo.base.BaseFragmentPagerAdapter
@@ -78,4 +79,23 @@ class HomeFragment : BaseVmFragment<HomeViewModel>(), ScrollToTop {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        LogUtil.d("onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        LogUtil.d("onStop")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        LogUtil.d("onDestroyView")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        LogUtil.d("onDestroy")
+    }
 }

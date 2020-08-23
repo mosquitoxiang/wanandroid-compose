@@ -1,5 +1,6 @@
 package com.illu.demo.ui.find.share
 
+import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import com.illu.baselibrary.core.ActivityHelper

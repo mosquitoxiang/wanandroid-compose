@@ -1,5 +1,6 @@
 package com.illu.demo.ui.mine.setting
 
+import android.os.Bundle
 import com.illu.baselibrary.manager.SettingManager
 import com.illu.baselibrary.utils.isNightMode
 import com.illu.baselibrary.utils.setNightMode
