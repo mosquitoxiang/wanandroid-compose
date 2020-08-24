@@ -5,6 +5,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.AppBarLayout
 import com.illu.baselibrary.core.ActivityHelper
+import com.illu.baselibrary.ext.clickWithTrigger
 import com.illu.baselibrary.utils.LogUtil
 import com.illu.demo.base.BaseVmFragment
 import com.illu.demo.R
@@ -61,7 +62,7 @@ class HomeFragment : BaseVmFragment<HomeViewModel>(), ScrollToTop {
                 currentOffset = verticalOffset
             }
         })
-        llSearch.setOnClickListener {
+        llSearch.clickWithTrigger {
             val bundle = ActivityOptionsCompat
                 .makeSceneTransitionAnimation(requireActivity(), toolbar, "llSearch").toBundle()
             ActivityHelper.start(

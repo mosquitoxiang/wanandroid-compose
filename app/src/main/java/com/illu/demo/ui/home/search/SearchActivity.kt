@@ -5,6 +5,7 @@ import androidx.core.view.isGone
 import androidx.core.widget.addTextChangedListener
 import com.illu.baselibrary.core.ActivityHelper
 import com.illu.baselibrary.ext.hideSoftInput
+import com.illu.baselibrary.utils.LogUtil
 import com.illu.demo.R
 import com.illu.demo.base.BaseVmActivity
 import com.illu.demo.ui.home.search.history.HistoryFragment
@@ -79,5 +80,20 @@ class SearchActivity : BaseVmActivity<SearchViewModel>() {
 
     override fun onBackPressed() {
         imgBack.performClick()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        LogUtil.d("onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        LogUtil.d("onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        LogUtil.d("onDestroy")
     }
 }
