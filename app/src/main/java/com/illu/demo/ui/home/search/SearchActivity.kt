@@ -30,7 +30,7 @@ class SearchActivity : BaseVmActivity<SearchViewModel>() {
 
     override fun initView() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.container, historyFragment)
+            .add(R.id.container, historyFragment, historyFragment.tag)
             .add(R.id.container, resultFragment)
             .show(historyFragment)
             .hide(resultFragment)

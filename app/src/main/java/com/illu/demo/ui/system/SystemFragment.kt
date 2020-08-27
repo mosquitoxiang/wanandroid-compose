@@ -41,10 +41,32 @@ class SystemFragment : BaseVmFragment<SystemViewModel>(), ScrollToTop {
         ivFilter.setOnClickListener {
             categoryFragment?.show(childFragmentManager)
         }
+        appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, offset ->
+            if (activity is MainActivity && currentOffset != offset) {
+                (activity as MainActivity).animateBottomNavigationView(offset > currentOffset)
+                currentOffset = offset
+            }
+        })
     }
 
-    override fun lazyLoadData() {
+    override fun initData() {
         mViewModel.getCategory()
+    }
+
+    private fun setUp(categories: MutableList<CategoryBean>) {
+        titles.clear()
+        fragments.clear()
+        categories.forEach {
+            titles.add(it.name!!)
+            fragments.add(SystemPagerFragment.instance(it.children))
+        }
+        viewPager.adapter = BaseFragmentPagerAdapter(
+            childFragmentManager,
+            fragments,
+            titles
+        )
+        viewPager.offscreenPageLimit = titles.size
+        tabLayout.setupWithViewPager(viewPager)
     }
 
     override fun observe() {
@@ -64,28 +86,6 @@ class SystemFragment : BaseVmFragment<SystemViewModel>(), ScrollToTop {
                 reloadView.isVisible = it
             })
         }
-        appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, offset ->
-            if (activity is MainActivity && currentOffset != offset) {
-                (activity as MainActivity).animateBottomNavigationView(offset > currentOffset)
-                currentOffset = offset
-            }
-        })
-    }
-
-    private fun setUp(categories: MutableList<CategoryBean>) {
-        titles.clear()
-        fragments.clear()
-        categories.forEach {
-            titles.add(it.name!!)
-            fragments.add(SystemPagerFragment.instance(it.children))
-        }
-        viewPager.adapter = BaseFragmentPagerAdapter(
-            childFragmentManager,
-            fragments,
-            titles
-        )
-        viewPager.offscreenPageLimit = titles.size
-        tabLayout.setupWithViewPager(viewPager)
     }
 
     override fun scrollToTop() {

@@ -17,10 +17,6 @@ abstract class BaseFragment : Fragment(), OnTitleBarListener{
         return inflater.inflate(getLayoutId(), container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
-
     abstract fun getLayoutId(): Int
     abstract fun initView()
     open fun initData() {}

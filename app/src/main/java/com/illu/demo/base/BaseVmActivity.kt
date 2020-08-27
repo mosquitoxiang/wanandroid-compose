@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.illu.baselibrary.core.ActivityHelper
+import com.illu.demo.common.bus.Bus
+import com.illu.demo.common.bus.USER_LOGIN_STATE_CHANGED
 import com.illu.demo.common.isLogin
 import com.illu.demo.ui.login.LoginActivity
 
@@ -26,6 +28,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseActivity() {
     open fun observer() {
         mViewModel.loginStatusInvalid.observe(this, Observer {
             if (it) {
+                Bus.post(USER_LOGIN_STATE_CHANGED, false)
                 ActivityHelper.start(LoginActivity::class.java)
             }
         })

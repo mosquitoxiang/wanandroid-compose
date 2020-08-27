@@ -1,9 +1,12 @@
 package com.illu.demo.base
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.illu.baselibrary.core.ActivityHelper
+import com.illu.demo.common.bus.Bus
+import com.illu.demo.common.bus.USER_LOGIN_STATE_CHANGED
 import com.illu.demo.common.isLogin
 import com.illu.demo.ui.login.LoginActivity
 
@@ -14,6 +17,14 @@ abstract class BaseVmFragment <VM : BaseViewModel> : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+//        initViewModel()
+//        observe()
+//        initView()
+//        initData()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initViewModel()
         observe()
         initView()
@@ -49,10 +60,11 @@ abstract class BaseVmFragment <VM : BaseViewModel> : BaseFragment() {
     }
 
     open fun observe() {
-//        mViewModel.loginStatusInvalid.observe(viewLifecycleOwner, Observer {
-//            if (it) {
-//                ActivityHelper.start(LoginActivity::class.java)
-//            }
-//        })
+        mViewModel.loginStatusInvalid.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                Bus.post(USER_LOGIN_STATE_CHANGED, false)
+                ActivityHelper.start(LoginActivity::class.java)
+            }
+        })
     }
 }
