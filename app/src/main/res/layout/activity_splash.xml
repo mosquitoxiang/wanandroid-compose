@@ -7,9 +7,4 @@
     tools:context="com.illu.demo.ui.SplashActivity"
     android:background="@color/bgColorPrimary">
 
-    <com.illu.demo.test.PieView
-        android:id="@+id/pv"
-        android:layout_width="300dp"
-        android:layout_height="300dp"/>
-
 </LinearLayout>
