@@ -8,6 +8,8 @@ import com.illu.baselibrary.core.removeSpValue
 import com.illu.baselibrary.manager.SettingManager
 import com.illu.baselibrary.utils.isMainProcess
 import com.illu.baselibrary.utils.setNightMode
+import leakcanary.AppWatcher
+import leakcanary.LeakCanary
 
 class App : Application(){
 

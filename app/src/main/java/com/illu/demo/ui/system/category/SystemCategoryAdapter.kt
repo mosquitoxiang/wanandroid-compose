@@ -7,9 +7,6 @@ import com.illu.demo.R
 import com.illu.demo.ui.home.project.CategoryBean
 import kotlinx.android.synthetic.main.item_system_category.view.*
 
-/**
- * Created by xiaojianjun on 2019-11-17.
- */
 class SystemCategoryAdapter(
     layoutResId: Int = R.layout.item_system_category,
     categoryList: List<CategoryBean>,
