@@ -2,13 +2,9 @@ package com.illu.demo.ui.system
 
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import com.google.android.material.appbar.AppBarLayout
-import com.illu.baselibrary.App
 import com.illu.demo.base.BaseVmFragment
-import com.illu.baselibrary.utils.LogUtil
-import com.illu.baselibrary.utils.getScreenHeight
 import com.illu.demo.R
 import com.illu.demo.base.BaseFragmentPagerAdapter
 import com.illu.demo.common.ScrollToTop
@@ -49,24 +45,8 @@ class SystemFragment : BaseVmFragment<SystemViewModel>(), ScrollToTop {
         })
     }
 
-    override fun initData() {
+    override fun lazyLoadData() {
         mViewModel.getCategory()
-    }
-
-    private fun setUp(categories: MutableList<CategoryBean>) {
-        titles.clear()
-        fragments.clear()
-        categories.forEach {
-            titles.add(it.name!!)
-            fragments.add(SystemPagerFragment.instance(it.children))
-        }
-        viewPager.adapter = BaseFragmentPagerAdapter(
-            childFragmentManager,
-            fragments,
-            titles
-        )
-        viewPager.offscreenPageLimit = titles.size
-        tabLayout.setupWithViewPager(viewPager)
     }
 
     override fun observe() {
@@ -86,6 +66,22 @@ class SystemFragment : BaseVmFragment<SystemViewModel>(), ScrollToTop {
                 reloadView.isVisible = it
             })
         }
+    }
+
+    private fun setUp(categories: MutableList<CategoryBean>) {
+        titles.clear()
+        fragments.clear()
+        categories.forEach {
+            titles.add(it.name!!)
+            fragments.add(SystemPagerFragment.instance(it.children))
+        }
+        viewPager.offscreenPageLimit = titles.size
+        viewPager.adapter = BaseFragmentPagerAdapter(
+            childFragmentManager,
+            fragments,
+            titles
+        )
+        tabLayout.setupWithViewPager(viewPager)
     }
 
     override fun scrollToTop() {

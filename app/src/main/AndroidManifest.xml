@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:label">
-        <activity android:name=".ui.find.share.ShareActivity"></activity>
+        <activity android:name=".ui.find.share.ShareActivity" />
         <activity
             android:name=".ui.home.search.SearchActivity"
             android:configChanges="keyboard|keyboardHidden|screenSize|fontScale|density|orientation"
@@ -69,7 +69,7 @@
             android:name=".ui.MainActivity"
             android:configChanges="keyboard|keyboardHidden|screenSize|fontScale|density|orientation"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

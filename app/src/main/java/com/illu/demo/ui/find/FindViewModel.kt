@@ -2,6 +2,7 @@ package com.illu.demo.ui.find
 
 import androidx.lifecycle.MutableLiveData
 import com.illu.demo.base.BaseViewModel
+import kotlinx.coroutines.Job
 
 class FindViewModel : BaseViewModel() {
 
@@ -11,10 +12,12 @@ class FindViewModel : BaseViewModel() {
     val hotKeyList = MutableLiveData<MutableList<HotKey>>()
     val commonWebList = MutableLiveData<List<CommonWeb>>()
 
+    private var job: Job? = null
+
     fun refreshData() {
         refreshStatus.value = true
         reloadStatus.value = false
-        launch(
+        job = launch(
             block = {
                 val banner = mRespository.getBanner()
                 bannerList.value = banner

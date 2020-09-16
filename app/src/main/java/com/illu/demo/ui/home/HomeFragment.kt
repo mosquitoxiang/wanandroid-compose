@@ -80,23 +80,4 @@ class HomeFragment : BaseVmFragment<HomeViewModel>(), ScrollToTop {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        LogUtil.d("onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        LogUtil.d("onStop")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        LogUtil.d("onDestroyView")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        LogUtil.d("onDestroy")
-    }
 }

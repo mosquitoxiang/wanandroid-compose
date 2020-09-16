@@ -15,14 +15,6 @@ abstract class BaseVmFragment <VM : BaseViewModel> : BaseFragment() {
     protected lateinit var mViewModel: VM
     private var lazyLoaded = false
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-//        initViewModel()
-//        observe()
-//        initView()
-//        initData()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
@@ -60,11 +52,13 @@ abstract class BaseVmFragment <VM : BaseViewModel> : BaseFragment() {
     }
 
     open fun observe() {
-        mViewModel.loginStatusInvalid.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                Bus.post(USER_LOGIN_STATE_CHANGED, false)
-                ActivityHelper.start(LoginActivity::class.java)
-            }
-        })
+        if (!mViewModel.loginStatusInvalid.hasObservers()) {
+            mViewModel.loginStatusInvalid.observe(viewLifecycleOwner, Observer {
+                if (it) {
+                    Bus.post(USER_LOGIN_STATE_CHANGED, false)
+                    ActivityHelper.start(LoginActivity::class.java)
+                }
+            })
+        }
     }
 }
