@@ -1,11 +1,15 @@
 package com.illu.demo.ui.common_compose_component
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -93,6 +97,31 @@ fun BoxLayout(
                 modifier = Modifier.align(Alignment.Center),
 //                color = colorResource(id = R.color.theme_orange)
             )
+        }
+    }
+}
+
+@Composable
+fun <T> LazyColumnItemCard(data: List<T>?, content: @Composable (index: Int, item: T) -> Unit) {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(colorResource(id = R.color.bgColorSecondary)),
+        //控制item间隔的
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        itemsIndexed(data ?: emptyList()) { index: Int, item: T ->
+            Surface(elevation = 1.dp) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(colorResource(id = R.color.white))
+                        .padding(horizontal = 16.dp, vertical = 16.dp)
+
+                ) {
+                    content(index, item)
+                }
+            }
         }
     }
 }

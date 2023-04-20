@@ -1,4 +1,4 @@
-package com.illu.demo.ui.home.project
+package com.illu.demo.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import com.illu.demo.base.BaseViewModel
@@ -8,6 +8,7 @@ import com.illu.demo.common.bus.Bus
 import com.illu.demo.common.bus.USER_COLLECT_UPDATE
 import com.illu.demo.common.isLogin
 import com.illu.demo.common.loadmore.LoadMoreStatus
+import com.illu.demo.ui.home.project.CategoryBean
 
 class ProjectViewModel : BaseViewModel() {
 
@@ -25,7 +26,11 @@ class ProjectViewModel : BaseViewModel() {
 
     private var page = INITIAL_PAGE
 
-    fun getTreeData() {
+    init {
+        getTreeData()
+    }
+
+    private fun getTreeData() {
         refreshStatus.value = true
         reloadStatus.value = false
         launch(

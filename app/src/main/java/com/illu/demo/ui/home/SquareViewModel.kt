@@ -1,4 +1,4 @@
-package com.illu.demo.ui.home.square
+package com.illu.demo.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import com.illu.demo.base.BaseViewModel
@@ -22,7 +22,11 @@ class SquareViewModel : BaseViewModel() {
 
     private var page = INITIAL_PAGE
 
-    fun getSquareData() {
+    init {
+        getSquareData()
+    }
+
+    private fun getSquareData() {
         reloadStatus.value = false
         refreshStatus.value = true
         launch(
