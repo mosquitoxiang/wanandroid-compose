@@ -8,7 +8,6 @@ import com.illu.baselibrary.core.ActivityHelper
 import com.illu.demo.common.bus.Bus
 import com.illu.demo.common.bus.USER_LOGIN_STATE_CHANGED
 import com.illu.demo.common.isLogin
-import com.illu.demo.ui.login.LoginActivity
 
 abstract class BaseVmFragment <VM : BaseViewModel> : BaseFragment() {
 
@@ -46,7 +45,7 @@ abstract class BaseVmFragment <VM : BaseViewModel> : BaseFragment() {
             then?.invoke()
             true
         } else {
-            ActivityHelper.start(LoginActivity::class.java)
+//            ActivityHelper.start(LoginActivity::class.java)
             false
         }
     }
@@ -56,7 +55,7 @@ abstract class BaseVmFragment <VM : BaseViewModel> : BaseFragment() {
             mViewModel.loginStatusInvalid.observe(viewLifecycleOwner, Observer {
                 if (it) {
                     Bus.post(USER_LOGIN_STATE_CHANGED, false)
-                    ActivityHelper.start(LoginActivity::class.java)
+//                    ActivityHelper.start(LoginActivity::class.java)
                 }
             })
         }

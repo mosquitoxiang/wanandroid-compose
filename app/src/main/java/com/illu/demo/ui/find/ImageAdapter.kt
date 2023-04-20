@@ -25,8 +25,8 @@ class ImageAdapter(mDatas: List<Banner>) : BannerAdapter<Banner, ImageAdapter.Ba
     }
 
     override fun onBindView(holder: BannerViewHolder?, data: Banner?, position: Int, size: Int) {
-        Glide.with(holder?.itemView?.context)
-            .load(data?.imagePath)
-            .into(holder?.imageView)
+//        Glide.with(holder?.itemView?.context)
+//            .load(data?.imagePath)
+//            .into(holder?.imageView)
     }
 }

@@ -1,17 +1,21 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+    id 'kotlin-parcelize'
+}
+
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion 33
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionName rootProject.ext.versionName
-        versionCode Integer.parseInt(versionName.replace(".", ""))
+        minSdkVersion 23
+        targetSdkVersion 33
+        versionName "1.0"
+        versionCode 1
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         javaCompileOptions {
@@ -40,34 +44,21 @@ android {
         jvmTarget = "1.8"
     }
 
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+    }
+    viewBinding {
+        enabled = true
+    }
     signingConfigs {
-        debug {
-            try {
-                storeFile file("wanandroid.jks")
-                storePassword "123456"
-                keyAlias "wanandroid"
-                keyPassword "123456"
-                v1SigningEnabled true
-                v2SigningEnabled false
-            }
-            catch (ex) {
-                ex.printStackTrace()
-                throw new InvalidUserDataException("秘钥用户名或密码错误${ex.getMessage()}")
-            }
-        }
-        release {
-            try {
-                storeFile file("wanandroid.jks")
-                storePassword "123456"
-                keyAlias "wanandroid"
-                keyPassword "123456"
-                v1SigningEnabled true
-                v2SigningEnabled false
-            }
-            catch (ex) {
-                ex.printStackTrace()
-                throw new InvalidUserDataException("秘钥用户名或密码错误")
-            }
+        named("debug") {
+            storeFile = rootProject.file("debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
         }
     }
 }
@@ -75,17 +66,29 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.1'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.24.7-alpha"
+    implementation "androidx.navigation:navigation-compose:2.5.3"
+    implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0"
-    implementation 'com.google.android.material:material:1.1.0'
+
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
+    implementation 'androidx.activity:activity-compose:1.7.0'
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    implementation 'com.google.android.material:material:1.8.0'
     implementation project(":baselibrary")
     implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50"
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
@@ -93,6 +96,10 @@ dependencies {
     implementation 'com.jeremyliao:live-event-bus-x:1.6.1'
     implementation 'com.hyman:flowlayout-lib:1.1.2'
     implementation 'com.youth.banner:banner:2.1.0'
-    kapt "androidx.room:room-compiler:2.2.5"
-    implementation "androidx.room:room-ktx:2.2.5"
+    kapt "androidx.room:room-compiler:2.5.0"
+    implementation "androidx.room:room-ktx:2.5.0"
+}
+
+kapt {
+    correctErrorTypes true
 }

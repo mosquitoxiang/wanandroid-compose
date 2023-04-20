@@ -60,7 +60,7 @@ abstract class BaseActivity : AppCompatActivity(), OnTitleBarListener {
 
     private val mHandler: Any = hashCode()
 
-    fun postDelayed(r: Runnable?, delayMillis: Long): Boolean {
+    fun postDelayed(r: Runnable, delayMillis: Long): Boolean {
         var delayMillis = delayMillis
         if (delayMillis < 0) {
             delayMillis = 0
@@ -68,7 +68,7 @@ abstract class BaseActivity : AppCompatActivity(), OnTitleBarListener {
         return postAtTime(r, SystemClock.uptimeMillis() + delayMillis)
     }
 
-    fun postAtTime(r: Runnable?, uptimeMillis: Long): Boolean {
+    fun postAtTime(r: Runnable, uptimeMillis: Long): Boolean {
         return HANDLER.postAtTime(r, mHandler, uptimeMillis)
     }
 

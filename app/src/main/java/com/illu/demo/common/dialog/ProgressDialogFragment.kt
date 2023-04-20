@@ -8,7 +8,6 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.illu.demo.R
-import kotlinx.android.synthetic.main.fragment_progress_dialog.*
 
 class ProgressDialogFragment : DialogFragment() {
 
@@ -29,7 +28,7 @@ class ProgressDialogFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tvMessage.text = getString(messageResId ?: R.string.loading)
+//        tvMessage.text = getString(messageResId ?: R.string.loading)
     }
 
     fun show(

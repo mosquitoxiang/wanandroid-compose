@@ -1,8 +1,8 @@
 package com.illu.demo.ui.navigation
 
-import android.os.Parcelable
 import com.illu.demo.bean.ArticleBean
-import kotlinx.android.parcel.Parcelize
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Nav(
