@@ -1,5 +1,6 @@
 package com.illu.demo.ui.home
 
+import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.MutableLiveData
 import com.illu.demo.base.BaseViewModel
 import com.illu.demo.bean.ArticleBean
@@ -7,7 +8,7 @@ import com.illu.demo.common.UserManager
 import com.illu.demo.common.bus.Bus
 import com.illu.demo.common.bus.USER_COLLECT_UPDATE
 import com.illu.demo.common.isLogin
-import com.illu.demo.common.loadmore.LoadMoreStatus
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class HotViewModel : BaseViewModel() {
 
@@ -17,8 +18,7 @@ class HotViewModel : BaseViewModel() {
 
     val refreshStatus = MutableLiveData<Boolean>()
     val reloadStatus = MutableLiveData<Boolean>()
-    val loadMoreStatus = MutableLiveData<LoadMoreStatus>()
-    val articleList = MutableLiveData<MutableList<ArticleBean>>()
+    val articleList = MutableStateFlow<MutableList<ArticleBean>?>(null)
 
     init {
         //放在这里处理第一页面可见，再次切换tab不会重复请求页面
@@ -41,7 +41,7 @@ class HotViewModel : BaseViewModel() {
                 val topArticleList = topArticleDefferd.await().apply { forEach { it.top = true } }
                 val pagination = pageDefferd.await()
                 page = pagination.curPage
-                articleList.value = mutableListOf<ArticleBean>().apply {
+                articleList.value = mutableStateListOf<ArticleBean>().apply {
                     addAll(topArticleList)
                     addAll(pagination.datas)
                 }
@@ -55,22 +55,17 @@ class HotViewModel : BaseViewModel() {
     }
 
     fun loadMoreArticleList() {
-        loadMoreStatus.value = LoadMoreStatus.LOADING
         launch(
             block = {
+                println("loadMore！！！！")
                 val pagination = mRespository.getArticleList(page)
                 page = pagination.curPage
                 val currenList = articleList.value ?: mutableListOf()
                 currenList.addAll(pagination.datas)
                 articleList.value = currenList
-                loadMoreStatus.value = if (pagination.offset >= pagination.total) {
-                    LoadMoreStatus.END
-                } else {
-                    LoadMoreStatus.COMPLETED
-                }
             },
             error = {
-                loadMoreStatus.value = LoadMoreStatus.ERROR
+
             }
         )
     }

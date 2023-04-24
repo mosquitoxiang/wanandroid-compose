@@ -1,5 +1,7 @@
 package com.illu.demo.ui.home
 
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.MutableLiveData
 import com.illu.demo.base.BaseViewModel
 import com.illu.demo.bean.ArticleBean
@@ -7,8 +9,8 @@ import com.illu.demo.common.UserManager
 import com.illu.demo.common.bus.Bus
 import com.illu.demo.common.bus.USER_COLLECT_UPDATE
 import com.illu.demo.common.isLogin
-import com.illu.demo.common.loadmore.LoadMoreStatus
 import com.illu.demo.ui.home.project.CategoryBean
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class ProjectViewModel : BaseViewModel() {
 
@@ -17,12 +19,10 @@ class ProjectViewModel : BaseViewModel() {
         const val INITIAL_CHECKED = 0
     }
 
-    val loadMoreStatus = MutableLiveData<LoadMoreStatus>()
-    val refreshStatus = MutableLiveData<Boolean>()
-    val reloadStatus = MutableLiveData<Boolean>()
-    val treeListLiveData = MutableLiveData<MutableList<CategoryBean>>()
-    val articleList = MutableLiveData<MutableList<ArticleBean>>()
-    val checkPositionLiveData = MutableLiveData<Int>()
+    val refreshStatus = MutableStateFlow<Boolean?>(null)
+    val treeListLiveData = MutableStateFlow<MutableList<CategoryBean>?>(null)
+    val articleList = MutableStateFlow<MutableList<ArticleBean>?>(null)
+    val checkPositionLiveData = MutableStateFlow<Int?>(null)
 
     private var page = INITIAL_PAGE
 
@@ -32,27 +32,24 @@ class ProjectViewModel : BaseViewModel() {
 
     private fun getTreeData() {
         refreshStatus.value = true
-        reloadStatus.value = false
         launch(
             block = {
                 val responseList = mRespository.getTreeData()
-                treeListLiveData.value = responseList.toMutableList()
+                treeListLiveData.value = responseList.toMutableStateList()
                 val id = responseList[INITIAL_CHECKED].id
                 checkPositionLiveData.value = INITIAL_CHECKED
                 val childrenData = mRespository.getChildrenData(INITIAL_PAGE, id)
                 page = childrenData.curPage
-                articleList.value = childrenData.datas.toMutableList()
+                articleList.value = childrenData.datas.toMutableStateList()
                 refreshStatus.value = false
             },
             error = {
                 refreshStatus.value = false
-                reloadStatus.value = true
             }
         )
     }
 
     fun loadMoreData() {
-        loadMoreStatus.value = LoadMoreStatus.LOADING
         launch(
             block = {
                 val treeList = treeListLiveData.value ?:return@launch
@@ -60,26 +57,20 @@ class ProjectViewModel : BaseViewModel() {
                 val id = treeList[checkPosition].id
                 val newChildData = mRespository.getChildrenData(page + 1, id)
                 page = newChildData.curPage
-                val currentList = articleList.value ?: mutableListOf()
+                val currentList = articleList.value ?: mutableStateListOf()
                 currentList.addAll(newChildData.datas)
                 articleList.value = currentList
-                loadMoreStatus.value = if (newChildData.offset >= newChildData.total) {
-                    LoadMoreStatus.END
-                } else {
-                    LoadMoreStatus.COMPLETED
-                }
             },
             error = {
-                loadMoreStatus.value = LoadMoreStatus.ERROR
+
             }
         )
     }
 
     fun changePosition(position: Int = checkPositionLiveData.value ?: INITIAL_CHECKED) {
         refreshStatus.value = true
-        reloadStatus.value = false
         if (position != checkPositionLiveData.value) {
-            articleList.value = mutableListOf()
+            articleList.value = mutableStateListOf()
             checkPositionLiveData.value = position
         }
         launch(
@@ -88,13 +79,12 @@ class ProjectViewModel : BaseViewModel() {
                 val id = treeList[position].id
                 val childrenData = mRespository.getChildrenData(INITIAL_PAGE, id)
                 page = childrenData.curPage
-                articleList.value = childrenData.datas.toMutableList()
+                articleList.value = childrenData.datas.toMutableStateList()
 
                 refreshStatus.value = false
             },
             error = {
                 refreshStatus.value = false
-                reloadStatus.value = true
             }
         )
     }

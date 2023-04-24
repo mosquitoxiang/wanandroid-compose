@@ -5,5 +5,5 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun NavigationPageContent() {
-    Text(text = "3")
+    TitleBarBase(isShowLeftIcon = false, title = "导航", isShowRightIcon = false)
 }

@@ -21,6 +21,7 @@ fun MinePageContent() {
             .background(colorResource(id = R.color.bgColorSecondary))
             .fillMaxSize()
     ) {
+        TitleBarBase(isShowLeftIcon = false, title = "我的", isShowRightIcon = false)
         Spacer()
         Head() {
 
@@ -56,11 +57,11 @@ fun MinePageContent() {
 }
 
 @Composable
-fun Spacer() {
+fun Spacer(height: Int = 8) {
     Spacer(
         modifier = Modifier
             .fillMaxWidth()
-            .height(8.dp)
+            .height(height.dp)
             .background(colorResource(id = R.color.bgColorSecondary))
     )
 }

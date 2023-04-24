@@ -1,5 +1,7 @@
-package com.illu.demo.ui.home.gzh
+package com.illu.demo.ui.home
 
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.MutableLiveData
 import com.illu.demo.base.BaseViewModel
 import com.illu.demo.bean.ArticleBean
@@ -9,6 +11,7 @@ import com.illu.demo.common.bus.USER_COLLECT_UPDATE
 import com.illu.demo.common.isLogin
 import com.illu.demo.common.loadmore.LoadMoreStatus
 import com.illu.demo.ui.home.project.CategoryBean
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class GzhViewModel : BaseViewModel() {
 
@@ -21,12 +24,16 @@ class GzhViewModel : BaseViewModel() {
     val reloadStatus = MutableLiveData<Boolean>()
     val checkedPosition = MutableLiveData<Int>()
     val loadingMoreStatus = MutableLiveData<LoadMoreStatus>()
-    val authorList = MutableLiveData<MutableList<CategoryBean>>()
-    val articleList = MutableLiveData<MutableList<ArticleBean>>()
+    val authorList = MutableStateFlow<MutableList<CategoryBean>?>(null)
+    val articleList = MutableStateFlow<MutableList<ArticleBean>?>(null)
 
     private var page = INITIAL_PAGE
 
-    fun requestData() {
+    init {
+        requestData()
+    }
+
+    private fun requestData() {
         freshStatus.value = true
         reloadStatus.value = false
         launch(
@@ -35,7 +42,7 @@ class GzhViewModel : BaseViewModel() {
                 authorList.value = author
                 val id = author[CHECKED_POSITION].id
                 val article = mRespository.getGzhArticle(id, page)
-                articleList.value = article.datas.toMutableList()
+                articleList.value = article.datas.toMutableStateList()
                 checkedPosition.value = CHECKED_POSITION
                 page = article.curPage
                 freshStatus.value = false
@@ -51,7 +58,7 @@ class GzhViewModel : BaseViewModel() {
         freshStatus.value = true
         reloadStatus.value = false
         if (checkPosition != checkedPosition.value) {
-            articleList.value = mutableListOf()
+            articleList.value = mutableStateListOf()
             checkedPosition.value = checkPosition
         }
         launch(

@@ -1,13 +1,14 @@
 package com.illu.demo.ui.home
 
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.toMutableStateList
 import com.illu.demo.base.BaseViewModel
 import com.illu.demo.bean.ArticleBean
 import com.illu.demo.common.UserManager
 import com.illu.demo.common.bus.Bus
 import com.illu.demo.common.bus.USER_COLLECT_UPDATE
 import com.illu.demo.common.isLogin
-import com.illu.demo.common.loadmore.LoadMoreStatus
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class SquareViewModel : BaseViewModel() {
 
@@ -15,10 +16,8 @@ class SquareViewModel : BaseViewModel() {
         const val INITIAL_PAGE = 0
     }
 
-    val refreshStatus = MutableLiveData<Boolean>()
-    val reloadStatus = MutableLiveData<Boolean>()
-    val articleList = MutableLiveData<MutableList<ArticleBean>>()
-    val loadMoreStatus = MutableLiveData<LoadMoreStatus>()
+    val refreshStatus = MutableStateFlow<Boolean?>(null)
+    val articleList = MutableStateFlow<MutableList<ArticleBean>?>(null)
 
     private var page = INITIAL_PAGE
 
@@ -26,41 +25,33 @@ class SquareViewModel : BaseViewModel() {
         getSquareData()
     }
 
-    private fun getSquareData() {
-        reloadStatus.value = false
+    fun getSquareData() {
         refreshStatus.value = true
         launch(
             block = {
                 val squareData = mRespository.getSquareData(INITIAL_PAGE)
                 page = squareData.curPage
-                articleList.value = squareData.datas.toMutableList()
+                articleList.value = squareData.datas.toMutableStateList()
                 refreshStatus.value = false
             },
             error = {
                 refreshStatus.value = false
-                reloadStatus.value = page == INITIAL_PAGE
             }
         )
     }
 
     fun loadMore() {
-        loadMoreStatus.value = LoadMoreStatus.LOADING
         launch(
             block = {
                 val squareData = mRespository.getSquareData(page)
                 page = squareData.curPage
 
-                val currentList = articleList.value ?: mutableListOf()
+                val currentList = articleList.value ?: mutableStateListOf()
                 currentList.addAll(squareData.datas)
                 articleList.value = currentList
-                loadMoreStatus.value = if (squareData.offset >= squareData.total) {
-                    LoadMoreStatus.END
-                } else {
-                    LoadMoreStatus.COMPLETED
-                }
             },
             error = {
-                loadMoreStatus.value = LoadMoreStatus.ERROR
+
             }
         )
     }
